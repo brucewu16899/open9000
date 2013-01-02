@@ -1,6 +1,21 @@
 var map;
 var infowindow;
-var mc;
+
+var mcCellen;
+var mcApo;
+var mcSani;
+var mcSchool;
+
+var mParking = [];
+var mSport = [];
+var mZiek = [];
+var mApo = [];
+var mBib = [];
+var mBios = [];
+var mArts = [];
+var mSchool = [];
+var mSani = [];
+var mCellen = [];
 
 // url to datasets
 var parkingurl 			   = 'http://datatank.gent.be/Mobiliteitsbedrijf/Parkings.json';
@@ -24,8 +39,6 @@ function initialize() {
 	};
 
 	map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-
-	mc = new MarkerClusterer(map);
 
 }
 
@@ -98,16 +111,17 @@ function getParking() {
 		 	}
 
 		 	//parking markers
-		 	parkingMarker = new google.maps.Marker({
+		 	marker = new google.maps.Marker({
 		 		position: new google.maps.LatLng(val.latitude, val.longitude),
 				title: val.description,
+				map: map,
 				icon: parkingimage
 		 	});
 
-		 	parkingMarker.setMap(map);
+		 	mParking.push(marker);
 
 		 	//get info for parking page
-		 	google.maps.event.addListener(parkingMarker, 'click', function() {
+		 	google.maps.event.addListener(marker, 'click', function() {
 		 		var title = val.description;
 		 		var address = val.address;
 		 		var contact = val.contactInfo;
@@ -118,16 +132,16 @@ function getParking() {
 		 	});
 
 		 	//infowindow
-		 	bindInfoWindow(parkingMarker, map, infowindow, '<h1>' + this.description + '</h1>' +
+		 	bindInfoWindow(marker, map, infowindow, '<h1>' + this.description + '</h1>' +
 		 	'<p>Places left: ' + this.availableCapacity + '</p><a href="#parking" data-transition="slide">go</a>');
 	    })
 	});
 }
 
 function bindInfoWindow(marker, map, infowindow, html){
-	google.maps.event.addListener(parkingMarker, 'click', function() {
+	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(html);
-		infowindow.open(map, parkingMarker);
+		infowindow.open(map, marker);
 	});
 }
 
@@ -143,6 +157,8 @@ function getSport() {
 				title: 'Sport centra',
 				icon: sportimg
 			});
+
+			mSport.push(marker);
 		});
 	});
 }
@@ -152,8 +168,6 @@ function getCellen() {
 		//console.log(data);
 		var telimg = 'img/telephone.png'
 
-		var markers = [];
-
 		$.each(data.telefooncellen, function(key, val){
 			marker = new google.maps.Marker({
 				position: new google.maps.LatLng(val.lat, val.long),
@@ -161,9 +175,9 @@ function getCellen() {
 				title: 'Telefoon cellen',
 				icon: telimg
 			});
-			markers.push(marker);
+			mCellen.push(marker);
 		});
-		mc = new MarkerClusterer(map, markers);
+		mcCellen = new MarkerClusterer(map, mCellen);
 	});
 }
 
@@ -171,7 +185,6 @@ function getApotheken() {
 	$.getJSON(apothekenurl, function(data) {
 		//console.log(data);
 		var apoimg = 'img/drugstore.png'
-		var markers = []; 
 
 		$.each(data.apotheken, function(key, val){
 			marker = new google.maps.Marker({
@@ -181,10 +194,10 @@ function getApotheken() {
 				icon: apoimg
 			});
 
-			markers.push(marker);
+			mApo.push(marker);
 		});
 
-		mc = new MarkerClusterer(map, markers);
+		mcApo = new MarkerClusterer(map, mApo);
 	});
 }
 
@@ -193,7 +206,6 @@ function getSani() {
 		//console.log(data);
 		var saniimg = 'img/toilets.png'
 		
-		var markers = [];
 		$.each(data.publieksanitair, function(key, val){
 
 			var latlng = new google.maps.LatLng(val.lat, val.long);
@@ -205,9 +217,9 @@ function getSani() {
 				icon: saniimg
 			});
 
-			markers.push(marker);
+			mSani.push(marker);
 		});
-		mc = new MarkerClusterer(map, markers);
+		mcSani = new MarkerClusterer(map, mSani);
 	});
 }
 
@@ -223,6 +235,8 @@ function getBios() {
 				title: 'Bioscopen',
 				icon: biosimg
 			});
+
+			mBios.push(marker);
 		});
 	});
 }
@@ -239,6 +253,8 @@ function getBib() {
 				title: 'Bibliotheken',
 				icon: bibimg
 			});
+
+			mBib.push(marker);
 		});
 	});
 }
@@ -255,6 +271,8 @@ function getArts() {
 				title: 'Huisartsenwachtposten',
 				icon: artsimg
 			});
+
+			mArts.push(marker);
 		});
 	});
 }
@@ -264,8 +282,6 @@ function getSchool() {
 		//console.log(data);
 		var schoolimg = 'img/cramschool.png'
 
-		var markers = [];
-
 		$.each(data.secundairescholen, function(key, val){
 			marker = new google.maps.Marker({
 				position: new google.maps.LatLng(val.lat, val.long),
@@ -273,10 +289,10 @@ function getSchool() {
 				title: 'Schoolen',
 				icon: schoolimg
 			});
-			markers.push(marker);
+			mSchool.push(marker);
 		});
 
-		mc = new MarkerClusterer(map, markers);
+		mcSchool = new MarkerClusterer(map, mSchool);
 	});
 }
 
@@ -292,8 +308,84 @@ function getZiekenhuis() {
 				title: 'Ziekenhuizen',
 				icon: ziekimg
 			});
+			mZiek.push(marker);
 		});
 	});
+}
+
+function removeMarkers(){
+	if (mParking) {
+		for (i in mParking) {
+			mParking[i].setMap(null)
+		}
+		mParking.length = 0;
+	}
+	if (mApo) {
+		for (i in mApo) {
+			mApo[i].setMap(null)
+		}
+		mApo.length = 0;
+	}
+	if (mSchool) {
+		for (i in mSchool) {
+			mSchool[i].setMap(null)
+		}
+		mSchool.length = 0;
+	}
+	if (mSani) {
+		for (i in mSani) {
+			mSani[i].setMap(null)
+		}
+		mSani.length = 0;
+	}
+	if (mSport) {
+		for (i in mSport) {
+			mSport[i].setMap(null)
+		}
+		mSport.length = 0;
+	}
+	if (mZiek) {
+		for (i in mZiek) {
+			mZiek[i].setMap(null)
+		}
+		mZiek.length = 0;
+	}
+	if (mArts) {
+		for (i in mArts) {
+			mArts[i].setMap(null)
+		}
+		mArts.length = 0;
+	}
+	if (mBib) {
+		for (i in mBib) {
+			mBib[i].setMap(null)
+		}
+		mBib.length = 0;
+	}
+	if (mBios) {
+		for (i in mBios) {
+			mBios[i].setMap(null)
+		}
+		mBios.length = 0;
+	}
+	if (mCellen) {
+		for (i in mCellen) {
+			mCellen[i].setMap(null)
+		}
+		mCellen.length = 0;
+	}
+	if (mcSchool) {
+		mcSchool.clearMarkers();
+	}
+	if (mcCellen) {
+		mcCellen.clearMarkers();
+	}
+	if (mcApo) {
+		mcApo.clearMarkers();
+	}
+	if (mcSani) {
+		mcSani.clearMarkers();
+	}
 }
 
 function checkState() {
@@ -302,60 +394,80 @@ function checkState() {
       $(".apo").addClass('ui-checkbox-on');
       $(".apo span").addClass('ui-icon-checkbox-on');
       getApotheken();
+    } else {
+    	removeMarkers();
     }
     if (localStorage.arts === "checked") {
       $("#arts").attr("checked", "checked");
       $(".arts").addClass('ui-checkbox-on');
       $(".arts span").addClass('ui-icon-checkbox-on');
       getArts();
+    } else {
+    	removeMarkers();
     }
     if (localStorage.bib === "checked") {
       $("#bib").attr("checked", "checked");
       $(".bib").addClass('ui-checkbox-on');
       $(".bib span").addClass('ui-icon-checkbox-on');
       getBib();
+    } else {
+    	removeMarkers();
     }
     if (localStorage.bios === "checked") {
       $("#bios").attr("checked", "checked");
       $(".bios").addClass('ui-checkbox-on');
       $(".bios span").addClass('ui-icon-checkbox-on');
       getBios();
+    } else {
+    	removeMarkers();
     }
     if (localStorage.cellen === "checked") {
       $("#cellen").attr("checked", "checked");
       $(".cellen").addClass('ui-checkbox-on');
       $(".cellen span").addClass('ui-icon-checkbox-on');
       getCellen();
+    } else {
+    	removeMarkers();
     }
     if (localStorage.school === "checked") {
       $("#school").attr("checked", "checked");
       $(".school").addClass('ui-checkbox-on');
       $(".school span").addClass('ui-icon-checkbox-on');
       getSchool();
+    } else {
+    	removeMarkers();
     }
     if (localStorage.parking === "checked") {
       $("#parking").attr("checked", "checked");
       $(".parking").addClass('ui-checkbox-on');
       $(".parking span").addClass('ui-icon-checkbox-on');
       getParking();
+    } else {
+    	removeMarkers();
     }
     if (localStorage.sport === "checked") {
       $("#sport").attr("checked", "checked");
       $(".sport").addClass('ui-checkbox-on');
       $(".sport span").addClass('ui-icon-checkbox-on');
       getSport();
+    } else {
+    	removeMarkers();
     }
     if (localStorage.sani === "checked") {
       $("#sani").attr("checked", "checked");
       $(".sani").addClass('ui-checkbox-on');
       $(".sani span").addClass('ui-icon-checkbox-on');
       getSani();
+    } else {
+    	removeMarkers();
     }
     if (localStorage.ziek === "checked") {
       $("#ziek").attr("checked", "checked");
       $(".ziek").addClass('ui-checkbox-on');
       $(".ziek span").addClass('ui-icon-checkbox-on');
       getZiekenhuis();
+    } else {
+    	removeMarkers();
     }
 }
 
