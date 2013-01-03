@@ -23,6 +23,7 @@ class Backoffice_IndexController extends Zend_Controller_Action
 	    // } else {
 	    //     $this->redirect('backoffice/admin/login');
 	    // }
+
 	}
 
 
