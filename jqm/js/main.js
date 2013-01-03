@@ -1,5 +1,7 @@
 var map;
-var infowindow;
+var infowindow = new google.maps.InfoWindow({
+	content: ''
+});
 
 var mcCellen;
 var mcApo;
@@ -25,7 +27,7 @@ var apothekenurl	 	   = 'http://data.appsforghent.be/poi/apotheken.json';
 var bibliothekenurl 	   = 'http://data.appsforghent.be/poi/bibliotheken.json';
 var bioscopenurl	 	   = 'http://data.appsforghent.be/poi/bioscopen.json';
 var huisartsenwachtposturl = 'http://data.appsforghent.be/poi/huisartsenwachtposten.json';
-var schoolennurl		   = 'http://data.appsforghent.be/poi/secundairescholen.json';
+var schoolennurl		   = 'http://data.appsforghent.be/poi/basisscholen.json';
 var sanitairurl			   = 'http://data.appsforghent.be/poi/publieksanitair.json';
 var telefooncellenurl	   = 'http://data.appsforghent.be/poi/telefooncellen.json';
 
@@ -39,7 +41,6 @@ function initialize() {
 	};
 
 	map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-
 }
 
 function MVCfun() {
@@ -93,9 +94,7 @@ function getParking() {
 	
 	$.getJSON(parkingurl, function(data) {
 		//console.log(data);
-		infowindow = new google.maps.InfoWindow({
-			content: ''
-		});
+		
 
 		var parkingimage = 'img/parking.png';
 
@@ -138,13 +137,6 @@ function getParking() {
 	});
 }
 
-function bindInfoWindow(marker, map, infowindow, html){
-	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.setContent(html);
-		infowindow.open(map, marker);
-	});
-}
-
 function getSport() {
 	$.getJSON(sportnurl, function(data) {
 		//console.log(data);
@@ -159,6 +151,21 @@ function getSport() {
 			});
 
 			mSport.push(marker);
+
+			//get info for sport page
+		 	google.maps.event.addListener(marker, 'click', function() {
+		 		var title = val.naam;
+		 		var address = val.straat + ' ' + val.nr + '<br>' + val.pstcd + ' ' + val.gem;
+		 		//var contact = val.contactInfo;
+
+	 			$('#sport-content h1').html(title);
+	 			$('#sport-content p').html(address);
+	 			//$('#sport-content a').html(contact);
+		 	});
+
+		 	//infowindow
+			bindInfoWindow(marker, map, infowindow, '<h1>' + this.naam + '</h1>' +
+		 	'<p>Type: ' + this.type + '</p><a href="#sport" data-transition="slide">go</a>');
 		});
 	});
 }
@@ -195,6 +202,20 @@ function getApotheken() {
 			});
 
 			mApo.push(marker);
+
+			//get info for apo page
+		 	google.maps.event.addListener(marker, 'click', function() {
+		 		var title = val.naam;
+		 		var address = val.adres + '<br>' + val.postcode + ' ' + val.gemeente;
+		 		//var contact = val.contactInfo;
+
+	 			$('#apo-content h1').html(title);
+	 			$('#apo-content p').html(address);
+	 			//$('#apo-content a').html(contact);
+		 	});
+
+		 	//infowindow
+			bindInfoWindow(marker, map, infowindow, '<h1>' + this.naam + '</h1><a href="#apo" data-transition="slide">go</a>');
 		});
 
 		mcApo = new MarkerClusterer(map, mApo);
@@ -209,6 +230,12 @@ function getSani() {
 		$.each(data.publieksanitair, function(key, val){
 
 			var latlng = new google.maps.LatLng(val.lat, val.long);
+			var open = open = val.open7op7;
+			if (open == 1) {
+	 			open = 'ja';
+	 		} else {
+	 			open = 'nee';
+	 		}
 
 			marker = new google.maps.Marker({
 				position: latlng,
@@ -218,6 +245,27 @@ function getSani() {
 			});
 
 			mSani.push(marker);
+
+			//get info for sani page
+		 	google.maps.event.addListener(marker, 'click', function() {
+		 		var title = val.situering;
+		 		var type = val.type;
+		 		var prijs = val.toegprijs;
+
+		 		if (prijs == 1) {
+		 			prijs = 'ja';
+		 		} else {
+		 			prijs = 'nee'
+		 		}
+
+	 			$('#sani-content h1').html(title);
+	 			$('#sani-content #betaland').html('Betalend: ' + prijs);
+	 			$('#sani-content #type').html('Type: ' + type);
+	 			//$('#sani-content a').html(contact);
+		 	});
+
+		 	//infowindow
+			bindInfoWindow(marker, map, infowindow, '<h1>' + this.situering + '</h1><p>Open 7op7: ' + open + '</p><a href="#sani" data-transition="slide">go</a>');
 		});
 		mcSani = new MarkerClusterer(map, mSani);
 	});
@@ -237,6 +285,18 @@ function getBios() {
 			});
 
 			mBios.push(marker);
+
+			//get info for parking page
+		 	google.maps.event.addListener(marker, 'click', function() {
+		 		var title = val.naam;
+		 		var address = val.ligging;
+
+	 			$('#bios-content h1').html(title);
+	 			$('#bios-content p').html(address);
+		 	});
+
+			//infowindow
+		 	bindInfoWindow(marker, map, infowindow, '<h1>' + this.naam + '</h1><a href="#bios" data-transition="slide">go</a>');
 		});
 	});
 }
@@ -255,6 +315,18 @@ function getBib() {
 			});
 
 			mBib.push(marker);
+
+			//get info for parking page
+		 	google.maps.event.addListener(marker, 'click', function() {
+		 		var title = val.locatie;
+		 		var afdeling = val.afdeling;
+
+	 			$('#bib-content h1').html(title);
+	 			$('#bib-content p').html('Afdeling: ' + afdeling);
+		 	});
+
+			//infowindow
+		 	bindInfoWindow(marker, map, infowindow, '<h1>Bib:</h1><h2>' + val.locatie + '</h2><a href="#bib" data-transition="slide">go</a>');
 		});
 	});
 }
@@ -273,6 +345,22 @@ function getArts() {
 			});
 
 			mArts.push(marker);
+
+			//get info for parking page
+		 	google.maps.event.addListener(marker, 'click', function() {
+		 		var title = val.naam_wacht;
+		 		var afdeling = val.afdeling;
+		 		var adres = val.adres + '<br>' + val.postcode + ' ' + val.gemeente;
+		 		var open = val.open_op;
+
+	 			$('#arts-content h1').html(title);
+	 			$('#arts-content #adres').html(adres);
+	 			$('#arts-content #open').html(open);
+
+		 	});
+
+			//infowindow
+		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.naam_wacht + '</h1><a href="#arts" data-transition="slide">go</a>');
 		});
 	});
 }
@@ -282,7 +370,7 @@ function getSchool() {
 		//console.log(data);
 		var schoolimg = 'img/cramschool.png'
 
-		$.each(data.secundairescholen, function(key, val){
+		$.each(data.basisscholen, function(key, val){
 			marker = new google.maps.Marker({
 				position: new google.maps.LatLng(val.lat, val.long),
 				map: map,
@@ -290,7 +378,25 @@ function getSchool() {
 				icon: schoolimg
 			});
 			mSchool.push(marker);
+
+			//get info for parking page
+		 	google.maps.event.addListener(marker, 'click', function() {
+		 		var title = val.roepnaam;
+		 		var adres = val.straat;
+		 		var aanbod = val.aanbod;
+		 		var net = val.net;
+
+	 			$('#school-content h1').html(title);
+	 			$('#school-content #adres').html(adres);
+	 			$('#school-content #aanbod').html(aanbod);
+	 			$('#school-content #net').html(net);
+		 	});
+
+			//infowindow
+		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.roepnaam + '</h1><a href="#school" data-transition="slide">go</a>');
+
 		});
+
 
 		mcSchool = new MarkerClusterer(map, mSchool);
 	});
@@ -309,7 +415,48 @@ function getZiekenhuis() {
 				icon: ziekimg
 			});
 			mZiek.push(marker);
-		});
+
+			//get info for parking page
+		 	google.maps.event.addListener(marker, 'click', function() {
+		 		var title = val.naam;
+		 		var adres = val.straat + ' ' + val.nr + '<br>' + val.postcode + ' ' + val.gemeente;
+		 		var aanbod = val.aanbod;
+		 		var net = val.net;
+
+	 			$('#ziek-content h1').html(title);
+	 			$('#ziek-content #adres').html(adres);
+		 	});
+		 	
+		 	//pano
+		 	var panoramaOptions = {
+			  position: new google.maps.LatLng(val.lat, val.long),
+			  pov: {
+			    heading: 34,
+			    pitch: 10,
+			    zoom: 1
+			  }
+			};
+		 	
+		 	bindPano(marker, panoramaOptions);
+
+			//infowindow
+		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.naam + '</h1><a href="#ziek" data-transition="slide">go</a>');
+		}); //eo each
+	}); //eo json
+}
+
+function bindPano(marker, panoramaOptions){
+	google.maps.event.addListener(marker, 'click', function() {
+		panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+	 	map.setStreetView(panorama);
+	 	panorama.setVisible(true);
+	});
+}
+
+function bindInfoWindow(marker, map, infowindow, html){
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.setContent(html);
+		infowindow.open(map, marker);
 	});
 }
 
@@ -625,7 +772,6 @@ $(function(){
 	initialize();
 	geolocation();
 	checkState();
-	//getApotheken();
 
 	$('input[type=checkbox]').change(function() {
 		localStorage[$(this).attr('id')] = $(this).attr('checked');
