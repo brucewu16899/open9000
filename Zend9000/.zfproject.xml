@@ -16,7 +16,11 @@
         </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
-      <layoutsDirectory enabled="false"/>
+      <layoutsDirectory>
+        <layoutScriptsDirectory>
+          <layoutScriptFile layoutName="layout"/>
+        </layoutScriptsDirectory>
+      </layoutsDirectory>
       <modelsDirectory/>
       <modulesDirectory>
         <moduleDirectory moduleName="backoffice">
@@ -29,7 +33,9 @@
               <actionMethod actionName="index"/>
             </controllerFile>
           </controllersDirectory>
-          <formsDirectory enabled="false"/>
+          <formsDirectory>
+            <formFile formName="Register"/>
+          </formsDirectory>
           <layoutsDirectory enabled="false"/>
           <modelsDirectory/>
           <servicesDirectory enabled="false"/>
@@ -39,6 +45,9 @@
                 <viewScriptFile forActionName="index"/>
               </viewControllerScriptsDirectory>
               <viewControllerScriptsDirectory forControllerName="Index">
+                <viewScriptFile forActionName="index"/>
+              </viewControllerScriptsDirectory>
+              <viewControllerScriptsDirectory forControllerName="Admin">
                 <viewScriptFile forActionName="index"/>
               </viewControllerScriptsDirectory>
             </viewScriptsDirectory>
