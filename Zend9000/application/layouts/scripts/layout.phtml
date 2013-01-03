@@ -1,28 +1,21 @@
-echo $this->doctype(), PHP_EOL; ?>
+<?php 
+  echo $this->doctype(), PHP_EOL; 
+?>
 <html lang="nl">
   <head>
     <?php
-    echo $this->headMeta()  , PHP_EOL,
-<<<<<<< HEAD
-         $this->headTitle() , PHP_EOL,
-         $this->headLink()  , PHP_EOL,
-         $this->headScript(), PHP_EOL;
-=======
-	 $this->headTitle() , PHP_EOL,
-	 $this->headLink()  , PHP_EOL,
-	 $this->headScript(), PHP_EOL;
->>>>>>> db shit
+      echo $this->headMeta()  , PHP_EOL,
+
+           $this->headTitle() , PHP_EOL,
+           $this->headLink()  , PHP_EOL,
+           $this->headScript(), PHP_EOL;
     ?>
   </head>
   <body>
     <div class="container">
       <?php
-      echo $this->layout()->content, PHP_EOL,
-<<<<<<< HEAD
-           $this->inlineScript()   , PHP_EOL;
-=======
-	   $this->inlineScript()   , PHP_EOL;
->>>>>>> db shit
+        echo $this->layout()->content, PHP_EOL,
+             $this->inlineScript()   , PHP_EOL;
       ?>
     </div>
   </body>
