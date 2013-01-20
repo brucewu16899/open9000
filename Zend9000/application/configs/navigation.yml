@@ -1,0 +1,46 @@
+Home:
+  label: Home
+  module: default
+  controller: index
+  action: index
+  pages:
+    BackofficeModule:
+      label: Backoffice
+      module: backoffice
+      controller: index
+      action: index
+      pages:
+        AdminController:
+          label: Admin
+          module: backoffice
+          controller: admin
+          action: index
+          pages:
+            loginAction:
+              label: Login
+              module: backoffice
+              controller: admin
+              action: login
+              resource: Backoffice_AdminController
+              privilege: loginAction
+            logoutAction:
+              label: Logout
+              module: backoffice
+              controller: admin
+              action: logout
+              resource: Backoffice_AdminController
+              privilege: logoutAction
+            registerAction:
+              label: Register
+              module: backoffice
+              controller: admin
+              action: register
+              resource: Backoffice_AdminController
+              privilege: registerAction
+            editAction:
+              label: Edit
+              module: backoffice
+              controller: admin
+              action: edit
+              resource: Backoffice_AdminController
+              privilege: editAction

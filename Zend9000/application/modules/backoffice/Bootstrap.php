@@ -29,8 +29,13 @@
  * @author     Olivier Parent
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
  */
-?><h1><?php echo $this->title; ?></h1>
-<?php
-echo $this->navigation()->breadcrumbs();
-echo $this->navigation()->menu();
-?>
+
+class Backoffice_Bootstrap extends Zend_Application_Module_Bootstrap
+{
+    public function _initFormTranslate()
+    {
+//        $translate = new Zend_Translate_Adapter_Array();
+
+//        Zend_Registry::set('Zend_Translate', $translate);
+    }
+}

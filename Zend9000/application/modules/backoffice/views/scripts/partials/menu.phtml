@@ -29,8 +29,9 @@
  * @author     Olivier Parent
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
  */
-?><h1><?php echo $this->title; ?></h1>
-<?php
-echo $this->navigation()->breadcrumbs();
-echo $this->navigation()->menu();
-?>
+?><nav class="navbar">
+    <div class="navbar-inner">
+    <?php echo $this->menu()->htmlify($this->container->findOneBy('active', true)->getParent()->getParent()->setClass('brand')) ?>
+    <?php echo $this->menu()->renderSubMenu($this->container) ?>
+    </div>
+</nav>

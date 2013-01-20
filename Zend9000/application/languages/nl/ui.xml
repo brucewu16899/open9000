@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2">
+    <file original="file.ext" source-language="en" target-language="nl" datatype="plaintext">
+        <body>
+            <trans-unit id="">
+                <source>Admin</source>
+                <target>Beheer</target>
+            </trans-unit>
+            <trans-unit id="">
+                <source>Email Address</source>
+                <target>E-mailadres</target>
+            </trans-unit>
+            <trans-unit id="">
+                <source>Family name</source>
+                <target>Familienaam</target>
+            </trans-unit>
+            <trans-unit id="">
+                <source>Given name</source>
+                <target>Voornaam</target>
+            </trans-unit>
+            <trans-unit id="">
+                <source>Home</source>
+                <target>Start</target>
+            </trans-unit>
+            <trans-unit id="">
+                <source>Login</source>
+                <target>Aanmelden</target>
+            </trans-unit>
+            <trans-unit id="">
+                <source>Logout</source>
+                <target>Afmelden</target>
+            </trans-unit>
+            <trans-unit id="">
+                <source>Register</source>
+                <target>Registreren</target>
+            </trans-unit>
+            <trans-unit id="">
+                <source>Password</source>
+                <target>Wachtwoord</target>
+            </trans-unit>
+            <trans-unit id="">
+                <source>Password (repeat)</source>
+                <target>Wachtwoord herhalen</target>
+            </trans-unit>
+            <trans-unit id="">
+                <source>User name</source>
+                <target>Gebruikersnaam</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

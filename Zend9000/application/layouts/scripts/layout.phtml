@@ -1,22 +1,51 @@
-<?php 
-  echo $this->doctype(), PHP_EOL; 
-?>
-<html lang="nl">
-  <head>
-    <?php
-      echo $this->headMeta()  , PHP_EOL,
+<?php
+/******************************************************************************
+ *                                                                            *
+ *                                                                            *
+ *                                                                            *
+ *                        aaaAAaaa            HHHHHH                          *
+ *                     aaAAAAAAAAAAaa         HHHHHH                          *
+ *                    aAAAAAAAAAAAAAAa        HHHHHH                          *
+ *                   aAAAAAAAAAAAAAAAAa       HHHHHH                          *
+ *                   aAAAAAa    aAAAAAA                                       *
+ *                   AAAAAa      AAAAAA                                       *
+ *                   AAAAAa      AAAAAA                                       *
+ *                   aAAAAAa     AAAAAA                                       *
+ *                    aAAAAAAaaaaAAAAAA       HHHHHH                          *
+ *                     aAAAAAAAAAAAAAAA       HHHHHH                          *
+ *                      aAAAAAAAAAAAAAA       HHHHHH                          *
+ *                         aaAAAAAAAAAA       HHHHHH                          *
+ *                                                                            *
+ *                                                                            *
+ *                                                                            *
+ *      a r t e v e l d e  u n i v e r s i t y  c o l l e g e  g h e n t      *
+ *                                                                            *
+ *                                                                            *
+ *                                 MEMBER OF GHENT UNIVERITY ASSOCIATION      *
+ *                                                                            *
+ *                                                                            *
+ ******************************************************************************
+ *
+ * @author     Olivier Parent
+ * @copyright  Copyright (c) 2012 Artevelde University College Ghent
+ */
 
-           $this->headTitle() , PHP_EOL,
-           $this->headLink()  , PHP_EOL,
-           $this->headScript(), PHP_EOL;
-    ?>
-  </head>
-  <body>
+echo $this->doctype(), PHP_EOL; ?>
+<html lang="nl">
+<head>
+<?php
+echo $this->headMeta()  , PHP_EOL,
+     $this->headTitle() , PHP_EOL,
+     $this->headLink()  , PHP_EOL,
+     $this->headScript(), PHP_EOL;
+?>
+</head>
+<body>
     <div class="container">
-      <?php
-        echo $this->layout()->content, PHP_EOL,
-             $this->inlineScript()   , PHP_EOL;
-      ?>
+<?php
+echo $this->layout()->content, PHP_EOL,
+     $this->inlineScript()   , PHP_EOL;
+?>
     </div>
-  </body>
+</body>
 </html>

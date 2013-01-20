@@ -30,7 +30,7 @@
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
  */
 
-class Backoffice_Form_Register extends Zend_Form
+class Backoffice_Form_Login extends Zend_Form
 {
     public function init()
     {
@@ -54,29 +54,8 @@ class Backoffice_Form_Register extends Zend_Form
                       'class' => 'control-group')),
         );
 
-        $text_givenname = new Zend_Form_Element_Text('givenname');
-        $text_givenname->setLabel('Given name')
-                       ->addFilter('StringTrim')                                // Zend/Filter/StringTrim.php
-                       ->addValidator('NotEmpty', true)                         // Zend/Validate/NotEmpty.php
-                       ->setDecorators($decorators)
-        ;
-
-        $text_familyname = new Zend_Form_Element_Text('familyname');
-        $text_familyname->setLabel('Family name')
-                        ->addFilter('StringTrim')                               // Zend/Filter/StringTrim.php
-                        ->addValidator('NotEmpty', true)                        // Zend/Validate/NotEmpty.php
-                        ->setDecorators($decorators)
-        ;
-
-        $text_email = new Zend_Form_Element_Text('email');
-        $text_email->setLabel('Email address')
-                   ->addFilter('StringTrim')                                    // Zend/Filter/StringTrim.php
-                   ->addValidator('EmailAddress', true)                         // Zend/Validate/EmailAddress.php
-                   ->addValidator('NotEmpty', true)                             // Zend/Validate/NotEmpty.php
-                   ->setDecorators($decorators)
-        ;
-
         $text_username = new Zend_Form_Element_Text('username');
+
         $text_username->setLabel('User name')
                       ->setRequired()
                       ->addFilter('StringTrim')                                 // Zend/Filter/StringTrim.php
@@ -91,15 +70,8 @@ class Backoffice_Form_Register extends Zend_Form
                      ->setDecorators($decorators)
         ;
 
-        $password_repeat = new Zend_Form_Element_Password('passwordrepeat');
-        $password_repeat->setLabel('Password (repeat)')
-                        ->setRequired()
-                        ->addValidator('NotEmpty', true)                        // Zend/Validate/NotEmpty.php
-                        ->setDecorators($decorators)
-        ;
-
         $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Registreren')
+        $submit->setLabel('Login')
                ->setOptions(array('class' => 'btn btn-primary'))
                ->setDecorators(array('ViewHelper',
                    array(
@@ -120,10 +92,10 @@ class Backoffice_Form_Register extends Zend_Form
         $view = Zend_Layout::getMvcInstance()->getView();
 
         $register = new Zend_Form_Element_Button('register');
-        $register->setDescription('Aanmelden')
+        $register->setDescription('Register')
                  ->setDecorators( array (
                      array('Description', array('tag'  => 'a',
-                                                'href'  => $view->baseUrl('supervisor/supervisor/login'),
+                                                'href'  => $view->baseUrl('backoffice/admin/register'),
                                                 'class' => 'btn btn-link')),
                      array(
                          array('closeInner' =>'HtmlTag'),
@@ -142,14 +114,33 @@ class Backoffice_Form_Register extends Zend_Form
              ->setDecorators(array('FormElements', 'Form'))
              ->setMethod('post')
              ->setAction('')
-             ->addElement($text_givenname )
-             ->addElement($text_familyname)
-             ->addElement($text_email     )
-             ->addElement($text_username  )
-             ->addElement($password_raw   )
-             ->addElement($password_repeat)
-             ->addElement($submit         )
+             ->addElement($text_username)
+             ->addElement($password_raw )
+             ->addElement($submit       )
+             ->addElement($register     )
         ;
     }
-}
 
+    /**
+     * @param mixed $data Form data.
+     * @return boolean
+     */
+    public function isValid($data)
+    {
+        $valid = parent::isValid($data);
+
+        foreach ($this->getElements() as $element) {
+            if ($element->hasErrors()) {
+
+                $decorator = $element->getDecorator('outer');
+
+                $options = $decorator->getOptions();
+                $options['class'] .= ' error';
+
+                $decorator->setOptions($options);
+            }
+        }
+
+        return $valid;
+    }
+}

@@ -29,8 +29,10 @@
  * @author     Olivier Parent
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
  */
-?><h1><?php echo $this->title; ?></h1>
-<?php
-echo $this->navigation()->breadcrumbs();
-echo $this->navigation()->menu();
-?>
+
+class Backoffice_Model_DbTable_Admins extends Zend_Db_Table_Abstract
+{
+    protected $_name = 'Admins'; // WARNING: case sensitive!
+
+    protected $_primary = 'adm_id';
+}

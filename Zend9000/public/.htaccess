@@ -6,4 +6,4 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 
-SetEnvIf Host localhost APPLICATION_ENV=development
+SetEnvIf host localhost APPLICATION_ENV=development

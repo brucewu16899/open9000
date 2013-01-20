@@ -29,8 +29,21 @@
  * @author     Olivier Parent
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
  */
-?><h1><?php echo $this->title; ?></h1>
-<?php
-echo $this->navigation()->breadcrumbs();
-echo $this->navigation()->menu();
-?>
+
+abstract class Ahs_Utility
+{
+    /**
+     * Hash method based on HMAC.
+     *
+     * @param mixed $data Data to be hashed.
+     * @param string $algo Hash algorithm. SHA-512 is the default.
+     * @return string
+     */
+    public static function hash($data, $algo = 'sha512')
+    {
+        $key = 'This is the super secret key, unique to this application';
+
+        // Hash-based Message Authentication Code
+        return hash_hmac($algo, $data, $key);
+    }
+}

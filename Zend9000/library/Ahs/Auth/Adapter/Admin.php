@@ -29,8 +29,24 @@
  * @author     Olivier Parent
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
  */
-?><h1><?php echo $this->title; ?></h1>
-<?php
-echo $this->navigation()->breadcrumbs();
-echo $this->navigation()->menu();
-?>
+
+class Ahs_Auth_Adapter_Admin extends Zend_Auth_Adapter_DbTable
+{
+    /**
+     * @param string $username User name.
+     * @param string $password Password.
+     */
+    public function __construct($username, $password)
+    {
+        parent::__construct();
+        $this->setTableName('Admins') // WARNING: case sensitive!
+             ->setIdentityColumn(  'adm_username')
+             ->setCredentialColumn('adm_password')
+             ->setIdentity(  $username)
+             ->setCredential($password)
+             ->getDbSelect()->where('adm_active = TRUE')
+                            ->where('adm_deleted = FALSE')
+        ;
+//        Zend_Debug::dump($this); exit;
+    }
+}
