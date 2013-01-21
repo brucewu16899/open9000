@@ -1,6 +1,6 @@
 <?php
 
-class AdminController extends Zend_Controller_Action
+class Frontoffice_IndexController extends Zend_Controller_Action
 {
 
     public function init()
@@ -13,6 +13,13 @@ class AdminController extends Zend_Controller_Action
         // action body
     }
 
+    public function getAction()
+    {
+        // action body
+    }
+
 
 }
+
+
 
