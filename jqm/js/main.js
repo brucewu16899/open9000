@@ -114,7 +114,7 @@ function getParking() {
 	 			$('#parking-content p').html(address);
 	 			$('#parking-content a').html(contact);
 		 	});
-
+		 	
 		 	//infowindow
 		 	bindInfoWindow(marker, map, infowindow, '<h1>' + this.description + '</h1>' +
 		 	'<p>Places left: ' + this.availableCapacity + '</p><a href="#parking" data-transition="slide">go</a>');
@@ -278,6 +278,7 @@ function getBios() {
 
 	 			$('#bios-content h1').html(title);
 	 			$('#bios-content p').html(address);
+	 			
 		 	});
 
 			//infowindow
@@ -597,6 +598,12 @@ function checkState() {
     }
 }
 
+//when page is live resize map
+$("#home").live("pageshow", function (b) {
+    var a = $(window).height() - $("#map_canvas").offset().top - $("#home").find('[data-role="footer"]').height() - 25;
+    $("#map_canvas").height(a);
+});
+
 //doc ready
 $(function(){
 
@@ -609,4 +616,13 @@ $(function(){
 		localStorage[$(this).attr('id')] = $(this).attr('checked');
 		checkState();
 	});
+
+	//when page is resized, resize map
+	$(window).resize(function (b) {
+        var a = $(window).height() - $("#map_canvas").offset().top - $("#home").find('[data-role="footer"]').height() - 25;
+        $("#map_canvas").height(a);
+        centermap();
+        return false;
+    });
+
 });
