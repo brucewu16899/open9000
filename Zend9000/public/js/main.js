@@ -99,7 +99,7 @@ function getParking() {
 	
 	banana(1,
 		function (data){
-			console.log(data);
+			//console.log(data);
 
 			$.each(data.Parkings.parkings, function(key, val){
 
@@ -190,12 +190,11 @@ function getParking() {
 			 	bindInfoWindow(marker, map, infowindow, '<h1>' + this.description + '</h1>' +
 			 	'<p>Places left: ' + this.availableCapacity + '</p><a href="#parking" data-transition="slide">go</a>');
 		    }); //eo each
-		}
-	);
+	});
 }
 
 function getSport() {
-	$.getJSON(sportnurl, function(data) {
+	banana(2, function(data) {
 		//console.log(data);
 		var sportimg = 'img/weights.png'
 
@@ -228,7 +227,7 @@ function getSport() {
 }
 
 function getCellen() {
-	$.getJSON(telefooncellenurl, function(data) {
+	banana(10, function(data){
 		//console.log(data);
 		var telimg = 'img/telephone.png'
 
@@ -246,7 +245,7 @@ function getCellen() {
 }
 
 function getApotheken() {
-	$.getJSON(apothekenurl, function(data) {
+	banana(4, function(data){
 		//console.log(data);
 		var apoimg = 'img/drugstore.png'
 
@@ -280,7 +279,7 @@ function getApotheken() {
 }
 
 function getSani() {
-	$.getJSON(sanitairurl, function(data) {
+	banana(9, function(data){
 		//console.log(data);
 		var saniimg = 'img/toilets.png'
 		
