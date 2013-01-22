@@ -328,8 +328,8 @@ function getSani() {
 }
 
 function getBios() {
-	$.getJSON(bioscopenurl, function(data) {
-		//console.log(data);
+
+	banana(5, function(data){
 		var biosimg = 'img/cinema.png'
 
 		$.each(data.bioscopen, function(key, val){
@@ -359,8 +359,7 @@ function getBios() {
 }
 
 function getBib() {
-	$.getJSON(bibliothekenurl, function(data) {
-		//console.log(data);
+	banana(6, function(data){
 		var bibimg = 'img/book.png'
 
 		$.each(data.bibliotheken, function(key, val){
@@ -389,8 +388,7 @@ function getBib() {
 }
 
 function getArts() {
-	$.getJSON(huisartsenwachtposturl, function(data) {
-		//console.log(data);
+	banana(7, function(data){
 		var artsimg = 'img/medicine.png'
 
 		$.each(data.huisartsenwachtposten, function(key, val){
@@ -423,8 +421,8 @@ function getArts() {
 }
 
 function getSchool() {
-	$.getJSON(schoolennurl, function(data) {
-		//console.log(data);
+	banana(8, function(data){
+
 		var schoolimg = 'img/cramschool.png'
 
 		$.each(data.basisscholen, function(key, val){
@@ -453,15 +451,12 @@ function getSchool() {
 		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.roepnaam + '</h1><a href="#school" data-transition="slide">go</a>');
 
 		});
-
-
 		mcSchool = new MarkerClusterer(map, mSchool);
 	});
 }
 
 function getZiekenhuis() {
-	$.getJSON(ziekenhuizenurl, function(data) {
-		//console.log(data);
+	banana(3, function(data){
 		var ziekimg = 'img/firstaid.png'
 
 		$.each(data.ziekenhuizen, function(key, val){
@@ -493,13 +488,11 @@ function getZiekenhuis() {
 			    zoom: 1
 			  }
 			};
-		 	
-		 	bindPano(marker, panoramaOptions);
-
+			
 			//infowindow
 		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.naam + '</h1><a href="#ziek" data-transition="slide">go</a>');
 		}); //eo each
-	}); //eo json
+	});
 }
 
 function bindInfoWindow(marker, map, infowindow, html){
