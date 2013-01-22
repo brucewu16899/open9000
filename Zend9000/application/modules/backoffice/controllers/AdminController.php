@@ -38,6 +38,12 @@ class Backoffice_AdminController extends Zend_Controller_Action
     public function init()
     {
         $this->_auth = Zend_Auth::getInstance();
+
+        $layout = Zend_Layout::getMvcInstance();
+        // Set a layout script path:
+        //$layout->setLayoutPath('/path/to/you/default/module/layouts');
+        // choose a different layout script:
+        $layout->setLayout('html5');
     }
 
     public function indexAction()
