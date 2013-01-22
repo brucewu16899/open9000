@@ -120,6 +120,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
              ->appendFile($view->baseUrl('bootstrap-2.1.1/js/bootstrap.min.js'))
              ->appendFile('http://maps.googleapis.com/maps/api/js?key=AIzaSyCN02ut-Z3iVvlbo8pSpR9E4Pob-Wu_kkE&sensor=true')
              ->appendFile($view->baseUrl('js/markerclusterer.js'))
+	     ->appendFile('http://d3js.org/d3.v3.min.js')
              ->appendFile($view->baseUrl('js/main.js'))
         ;
     }

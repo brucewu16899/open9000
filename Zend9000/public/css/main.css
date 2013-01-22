@@ -105,6 +105,14 @@ textarea {
   #apo-content h1:first-letter {
     text-transform: uppercase; }
 
+#p-right {
+  margin: 0 auto;
+  text-align: center; }
+  #p-right #free {
+    color: #1f77b4; }
+  #p-right #occupied {
+    color: #aec7e8; }
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    Theses examples override the primary ('mobile first') styles.

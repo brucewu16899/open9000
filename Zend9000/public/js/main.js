@@ -84,10 +84,14 @@ function getParking() {
 
 		$.each(data.Parkings.parkings, function(key, val){
 
+			var ac = val.availableCapacity;
+			var tc = val.totalCapacity;
+			var oc = tc - ac; //occupied
+
 			//different images
-		 	if (val.availableCapacity >= 400) {
+			if (ac >= 400) {
 		 		parkingimage = 'img/4+.png';
-		 	} else if (val.availableCapacity >= 200) {
+			} else if (ac >= 200) {
 		 		parkingimage = 'img/2+.png';
 		 	} else {
 		 		parkingimage = 'img/2.png';
@@ -111,8 +115,44 @@ function getParking() {
 		 		var contact = val.contactInfo;
 
 	 			$('#parking-content h1').html(title);
-	 			$('#parking-content p').html(address);
+				$('#parking-content .p-address').html(address);
 	 			$('#parking-content a').html(contact);
+				$('#p-right p').html('<span id="free">Free ' + ac + '</span> - <span id="occupied">Occupied ' + oc + '</span>');
+
+				var chartdata = [ ac, oc ];
+
+				var width = 100,
+				    height = 100,
+				    radius = Math.min(width, height) / 2;
+
+				var color = d3.scale.category20();
+
+				var pie = d3.layout.pie()
+				    .sort(null);
+
+				var arc = d3.svg.arc()
+				    .innerRadius(radius - 15)
+				    .outerRadius(radius);
+
+				var svg = d3.select("#canvas").append("svg")
+				    .attr("width", width)
+				    .attr("height", height)
+				  .append("g")
+				    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+				/* Compute the data join */
+				var path = svg.selectAll("path").data(pie(chartdata));
+
+				/* Enter */
+				path.enter().append("path");
+
+				/* Remove */
+				path.exit().remove();
+
+				/* Update */
+				path
+				    .attr("fill", function(d, i) { return color(i); })
+				    .attr("d", arc);
 		 	});
 		 	
 		 	//infowindow
