@@ -22,6 +22,25 @@ var mSchool = [];
 var mSani = [];
 var mCellen = [];
 
+function banana(choco, done) {
+	$.ajax({
+		url : "../tmp/open9000---cache" + choco,
+		type: "GET",
+		dataType: "text",
+		success: function (data){
+			var splitr = data.split(/s:[0-9]{3,}:"/);
+			var bananasplit = splitr[splitr.length-1];
+			var prosplit = bananasplit.toString().split('";}}');
+			var bossplit = prosplit[0];
+			var bossobject = JSON.parse(bossplit);
+			done(bossobject);
+		},
+		error : function () {
+			window.console.log("fail");
+		},
+	});
+}
+
 // url to datasets
 var parkingurl 			   = 'http://datatank.gent.be/Mobiliteitsbedrijf/Parkings.json';
 var sportnurl 			   = 'http://data.appsforghent.be/poi/sportgent.json';
@@ -78,99 +97,101 @@ function geoError(error) {
 
 function getParking() {
 	
-	$.getJSON(parkingurl, function(data) {
-		var parkingimage = 'img/parking.png';
+	banana(1,
+		function (data){
+			console.log(data);
 
-		$.each(data.Parkings.parkings, function(key, val){
+			$.each(data.Parkings.parkings, function(key, val){
 
-			var ac = val.availableCapacity;
-			var tc = val.totalCapacity;
-			var oc = tc - ac; //occupied
+				var ac = val.availableCapacity;
+				var tc = val.totalCapacity;
+				var oc = tc - ac; //occupied
 
-			//different images
-			if (ac >= 400) {
-		 		parkingimage = 'img/4+.png';
-			} else if (ac >= 200) {
-		 		parkingimage = 'img/2+.png';
-		 	} else {
-		 		parkingimage = 'img/2.png';
-		 	}
+				//different images
+				if (ac >= 400) {
+			 		parkingimage = 'img/4+.png';
+				} else if (ac >= 200) {
+			 		parkingimage = 'img/2+.png';
+			 	} else {
+			 		parkingimage = 'img/2.png';
+			 	}
 
-		 	//parking markers
-		 	marker = new google.maps.Marker({
-		 		position: new google.maps.LatLng(val.latitude, val.longitude),
-				title: val.description,
-				map: map,
-				icon: parkingimage
-		 	});
+			 	//parking markers
+			 	marker = new google.maps.Marker({
+			 		position: new google.maps.LatLng(val.latitude, val.longitude),
+					title: val.description,
+					map: map,
+					icon: parkingimage
+			 	});
 
-		 	//push in array
-		 	mParking.push(marker);
+			 	//push in array
+			 	mParking.push(marker);
 
-		 	//get info for parking page
-		 	google.maps.event.addListener(marker, 'click', function() {
+			 	//get info for parking page
+			 	google.maps.event.addListener(marker, 'click', function() {
 
 
-		 		var title = val.description;
-		 		var address = val.address;
-		 		var contact = val.contactInfo;
+			 		var title = val.description;
+			 		var address = val.address;
+			 		var contact = val.contactInfo;
 
-	 			$('#parking-content h1').html(title);
-				$('#parking-content .p-address').html(address);
-	 			$('#parking-content a').html(contact);
-				$('#p-right p').html('<span id="free">Free ' + ac + '</span> - <span id="occupied">Occupied ' + oc + '</span>');
-		 		
-		 		//only add one canvaselement
-		 		if ( $('#canvas').is(':empty') ){
+		 			$('#parking-content h1').html(title);
+					$('#parking-content .p-address').html(address);
+		 			$('#parking-content a').html(contact);
+					$('#p-right p').html('<span id="free">Free ' + ac + '</span> - <span id="occupied">Occupied ' + oc + '</span>');
+			 		
+			 		//only add one canvaselement
+			 		if ( $('#canvas').is(':empty') ){
 
-					var chartdata = [ ac, oc ];
+						var chartdata = [ ac, oc ];
 
-					var width = 100,
-					    height = 100,
-					    radius = Math.min(width, height) / 2;
+						var width = 100,
+						    height = 100,
+						    radius = Math.min(width, height) / 2;
 
-					var color = d3.scale.category20();
+						var color = d3.scale.category20();
 
-					var pie = d3.layout.pie()
-					    .sort(null);
+						var pie = d3.layout.pie()
+						    .sort(null);
 
-					var arc = d3.svg.arc()
-					    .innerRadius(radius - 15)
-					    .outerRadius(radius);
+						var arc = d3.svg.arc()
+						    .innerRadius(radius - 15)
+						    .outerRadius(radius);
 
-					var svg = d3.select("#canvas").append("svg")
-					    .attr("width", width)
-					    .attr("height", height)
-					  .append("g")
-					    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+						var svg = d3.select("#canvas").append("svg")
+						    .attr("width", width)
+						    .attr("height", height)
+						  .append("g")
+						    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-					/* Compute the data join */
-					var path = svg.selectAll("path").data(pie(chartdata));
+						//Compute the data join
+						var path = svg.selectAll("path").data(pie(chartdata));
 
-					/* Enter */
-					path.enter().append("path");
+						// Enter 
+						path.enter().append("path");
 
-					/* Remove */
-					path.exit().remove();
+						// Remove 
+						path.exit().remove();
 
-					/* Update */
-					path
-					    .attr("fill", function(d, i) { return color(i); })
-					    .attr("d", arc);
-		 		}
+						// Update 
+						path
+						    .attr("fill", function(d, i) { return color(i); })
+						    .attr("d", arc);
+			 		}
 
-		 	});
+			 	});
 
-			//empty the canvas on when going back
-			$('#backbutton').click( function () {
-				$('#canvas').empty();
-			});
-		 	
-		 	//infowindow
-		 	bindInfoWindow(marker, map, infowindow, '<h1>' + this.description + '</h1>' +
-		 	'<p>Places left: ' + this.availableCapacity + '</p><a href="#parking" data-transition="slide">go</a>');
-	    }); //eo each
-	});
+				//empty the canvas on when going back
+				$('#backbutton').click( function () {
+					$('#canvas').empty();
+				});
+			 	
+			 	//infowindow
+			 	bindInfoWindow(marker, map, infowindow, '<h1>' + this.description + '</h1>' +
+			 	'<p>Places left: ' + this.availableCapacity + '</p><a href="#parking" data-transition="slide">go</a>');
+		    }); //eo each
+		}
+	);
 }
 
 function getSport() {
@@ -657,29 +678,6 @@ $("#home").live("pageshow", function (b) {
 
 //doc ready
 $(function(){
-
-	$.ajax({
-		url : "../tmp/open9000---cache",
-		type: "GET",
-		dataType: "text",
-		success: function (data){
-			//window.console.log(data);
-			var splitr = data.split(':"');
-			//console.log(splitr[splitr.length-1]);
-
-			var kaka = splitr[splitr.length-1];
-			
-			//var prosplit = kaka.toString().split('";}}');
-			//var bossplit = prosplit[0];
-			//window.console.log(data);
-			//console.log(bossplit);
-			//var bossobject = JSON.parse(bossplit);
-			//console.log(bossobject);
-		},
-		error : function () {
-			window.console.log("fail");
-		},
-	});
 
 	initialize();
 	geolocation();

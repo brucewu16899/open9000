@@ -62,10 +62,10 @@ class IndexController extends Zend_Controller_Action
 
         mysql_connect('localhost', 'root', 'root');
         mysql_select_db('ZendFrameworkDemo');
-        $query = 'select count(id) from datasets';
+        $query = 'select count(id) as `amount` from datasets';
         $urls = mysql_query($query);
         $amountDatasetsArr = mysql_fetch_assoc($urls);
-        $amountDatasets = (int)$amountDatasetsArr["count(id)"];
+        $amountDatasets = (int)$amountDatasetsArr["amount"];
          
         for ($i=1; $i <= $amountDatasets; $i++) { 
         	//var_dump( $i );
