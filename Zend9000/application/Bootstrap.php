@@ -103,14 +103,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         ;
 
         $view->headLink() // Zend_View_Helper_HeadLink
+             ->appendStylesheet($view->baseUrl('css/normalize.css'))
+             ->appendStylesheet($view->baseUrl('jquery.mobile-1.2.0/jquery.mobile-1.2.0.min.css'))
              ->appendStylesheet($view->baseUrl('bootstrap-2.1.1/css/bootstrap.min.css'))
              ->appendStylesheet($view->baseUrl('bootstrap-2.1.1/css/bootstrap-responsive.min.css'))
              ->appendStylesheet($view->baseUrl('css/main.css'))
         ;
 
+        $view->headScript()
+             ->appendFile($view->baseUrl('js/modernizr-2.6.2.min.js'))
+        ;
+
         $view->inlineScript()
-             ->appendFile('http://code.jquery.com/jquery-latest.js')
+             ->appendFile('http://code.jquery.com/jquery-1.8.3.min.js')
+             ->appendFile($view->baseUrl('jquery.mobile-1.2.0/jquery.mobile-1.2.0.min.js'))
              ->appendFile($view->baseUrl('bootstrap-2.1.1/js/bootstrap.min.js'))
+             ->appendFile('http://maps.googleapis.com/maps/api/js?key=AIzaSyCN02ut-Z3iVvlbo8pSpR9E4Pob-Wu_kkE&sensor=true')
+             ->appendFile($view->baseUrl('js/markerclusterer.js'))
+             ->appendFile($view->baseUrl('js/main.js'))
         ;
     }
 

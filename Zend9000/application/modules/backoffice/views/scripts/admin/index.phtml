@@ -31,6 +31,59 @@
  */
 ?><h1><?php echo $this->title; ?></h1>
 <?php
-echo $this->navigation()->breadcrumbs();
+/*echo $this->navigation()->breadcrumbs();*/
 echo $this->navigation()->menu();
 ?>
+
+
+<?php /* CACHE TEST 
+ include_once 'Zend/Cache';
+
+$frontendOptions = array(
+    'lifetime' => null,
+    'automatic_serialization' => true
+);
+
+$backendOptions = array(
+    'cache_dir' => 'tmp/'
+);
+
+$cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+$id = 'urls';
+
+if (isset($_GET['form_submit']) && $_GET['form_submit'] == 'clear')
+{
+    $cache->remove($id);
+}
+
+$start_time = microtime(true);
+
+if (!($data = $cache->load($id))) {
+    echo "Not found in cache<br />";
+    
+    mysql_connect('localhost', 'root', 'root');
+    mysql_select_db('ZendFrameworkDemo');
+    $query = 'select url from datasets';
+    $urls = mysql_query($query);
+    
+    $data = array();
+    while ($row = mysql_fetch_assoc($urls)) {
+        $data[] = $row;
+    }
+    $cache->save($data);
+} else {
+    echo "Running from Cache<br />";
+}
+
+echo '<pre>';
+print_r($data);
+echo '</pre>';
+
+echo sprintf('%01.4f', microtime(true) - $start_time);
+
+?>
+
+<form method="get">
+    <input name="form_submit" type="submit" value="reload">
+    <input name="form_submit" type="submit" value="clear">
+</form> */

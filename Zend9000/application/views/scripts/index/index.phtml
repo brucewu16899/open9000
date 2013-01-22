@@ -1,43 +1,265 @@
-<style>
-    a:link,
-    a:visited
-    {
-        color: #0398CA;
-    }
+<!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
 
-    span#zf-name
-    {
-        color: #91BE3F;
-    }
+<!-- Home page -->
 
-    div#welcome
-    {
-        color: #FFFFFF;
-        background-image: url(http://framework.zend.com/images/bkg_header.jpg);
-        width:  600px;
-        height: 400px;
-        border: 2px solid #444444;
-        overflow: hidden;
-        text-align: center;
-    }
-
-    div#more-information
-    {
-        background-image: url(http://framework.zend.com/images/bkg_body-bottom.gif);
-        height: 100%;
-    }
-</style>
-<div id="welcome">
-    <h1>Welcome to the <span id="zf-name">Zend Framework!</span></h1>
-
-    <h3>This is your project's main page</h3>
-
-    <div id="more-information">
-        <p><img src="http://framework.zend.com/images/PoweredBy_ZF_4LightBG.png" /></p>
-        <p>
-            Helpful Links: <br />
-            <a href="http://framework.zend.com/">Zend Framework Website</a> |
-            <a href="http://framework.zend.com/manual/en/">Zend Framework Manual</a>
-        </p>
+<div data-role="page" id="home">
+    <div data-role="header" data-theme="c">
+        <a href="#" onclick="centermap()" data-role="button" data-iconpos="notext" data-icon="home"></a>
+        <h1>Toolkit 9000</h1>
+        <a href="#menu" data-rel="popup" data-icon="plus" class="ui-btn-right">Options</a>
+        <div data-role="popup" id="menu">
+            <h1>Datasets</h1>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <input type="checkbox" name="chb1" id="cellen">
+                    <label class="cellen" for="cellen">Telefooncellen</label>
+                    
+                    <input type="checkbox" name="chb2" id="sani">
+                    <label class="sani" for="sani">Publieke sanitair</label>
+                    
+                    <input type="checkbox" name="chb3" id="parking">
+                    <label class="parking" for="parking">Parkings</label>
+                    
+                    <input type="checkbox" name="chb4" id="bios">
+                    <label class="bios" for="bios">Bioscopen</label>
+                    
+                    <input type="checkbox" name="chb5" id="bib">
+                    <label class="bib" for="bib">Bibliotheken</label>
+                    
+                    <input type="checkbox" name="chb6" id="sport">
+                    <label class="sport" for="sport">Sport centra</label>
+                    
+                    <input type="checkbox" name="chb7" id="apo">
+                    <label class="apo" for="apo">Apotheken</label>
+                    
+                    <input type="checkbox" name="chb8" id="arts">
+                    <label class="arts" for="arts">Huisartsenwachtpost</label>
+                    
+                    <input type="checkbox" name="chb9" id="school">
+                    <label class="school" for="school">Schoolen</label>
+                    
+                    <input type="checkbox" name="chb10" id="ziek">
+                    <label class="ziek" for="ziek">Ziekenhuizen</label>
+                </fieldset>
+            </div>
+        </div>
     </div>
+    <div id="home-content" data-role="content">
+        <div id="map-container">
+            <div id="map_canvas"></div>
+        </div>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#list" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <!-- <div id="info"></div> -->
+        <h1 id="footer-center">▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<!-- Info pages -->
+
+<div data-role="page" id="parking">
+    <div data-role="header" data-theme="c"> 
+        <a href="index.html" data-transition="flip" data-rel="back" data-direction="reverse" data-icon="arrow-l">Back</a>
+        <h1>Parking info</h1> 
+    </div> 
+    
+    <div data-role="content" id="parking-content">
+        <h1></h1>
+        <p></p>
+        <a href=""></a>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <div id="info"></div>
+        <h1>▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<div data-role="page" id="sport">
+    <div data-role="header" data-theme="c"> 
+        <a href="index.html" data-transition="flip" data-rel="back" data-direction="reverse" data-icon="arrow-l">Back</a>
+        <h1>Apotheek Info</h1> 
+    </div> 
+    
+    <div data-role="content" id="sport-content">
+        <h1></h1>
+        <p></p>
+        <a href=""></a>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <div id="info"></div>
+        <h1>▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<div data-role="page" id="apo">
+    <div data-role="header" data-theme="c"> 
+        <a href="index.html" data-transition="flip" data-rel="back" data-direction="reverse" data-icon="arrow-l">Back</a>
+        <h1>Apotheek info</h1> 
+    </div> 
+    
+    <div data-role="content" id="apo-content">
+        <h1></h1>
+        <p></p>
+        <a href=""></a>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <div id="info"></div>
+        <h1>▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<div data-role="page" id="sani">
+    <div data-role="header" data-theme="c"> 
+        <a href="index.html" data-transition="flip" data-rel="back" data-direction="reverse" data-icon="arrow-l">Back</a>
+        <h1>Telefoon cellen info</h1> 
+    </div> 
+    
+    <div data-role="content" id="sani-content">
+        <h1></h1>
+        <p id="betalend"></p>
+        <p id="type"></p>
+        <a href=""></a>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <div id="info"></div>
+        <h1>▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<div data-role="page" id="bios">
+    <div data-role="header" data-theme="c"> 
+        <a href="index.html" data-transition="flip" data-rel="back" data-direction="reverse" data-icon="arrow-l">Back</a>
+        <h1>Cinema info</h1> 
+    </div> 
+    
+    <div data-role="content" id="bios-content">
+        <h1></h1>
+        <p></p>
+        <a href=""></a>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <div id="info"></div>
+        <h1>▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<div data-role="page" id="bib">
+    <div data-role="header" data-theme="c"> 
+        <a href="index.html" data-transition="flip" data-rel="back" data-direction="reverse" data-icon="arrow-l">Back</a>
+        <h1>Bibliotheek info</h1> 
+    </div> 
+    
+    <div data-role="content" id="bib-content">
+        <h1></h1>
+        <p></p>
+        <a href=""></a>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <div id="info"></div>
+        <h1>▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<div data-role="page" id="arts">
+    <div data-role="header" data-theme="c"> 
+        <a href="index.html" data-transition="flip" data-rel="back" data-direction="reverse" data-icon="arrow-l">Back</a>
+        <h1>Huisartsenwachtpost info</h1> 
+    </div> 
+    
+    <div data-role="content" id="arts-content">
+        <h1></h1>
+        <h2>Adres:</h2>
+        <p id="adres"></p>
+        <h2>Openingsuren:</h2>
+        <p id="open"></p>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <div id="info"></div>
+        <h1>▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<div data-role="page" id="school">
+    <div data-role="header" data-theme="c"> 
+        <a href="index.html" data-transition="flip" data-rel="back" data-direction="reverse" data-icon="arrow-l">Back</a>
+        <h1>School info</h1> 
+    </div> 
+    
+    <div data-role="content" id="school-content">
+        <h1></h1>
+        <h2>Adres:</h2>
+        <p id="adres"></p>
+        <h2>Aanbod:</h2>
+        <p id="aanbod"></p>
+        <h2>Net:</h2>
+        <p id="net"></p>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <div id="info"></div>
+        <h1>▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<div data-role="page" id="ziek">
+    <div data-role="header" data-theme="c"> 
+        <a href="index.html" data-transition="flip" data-rel="back" data-direction="reverse" data-icon="arrow-l">Back</a>
+        <h1>School info</h1> 
+    </div> 
+    
+    <div data-role="content" id="ziek-content">
+        <h1></h1>
+        <h2>Adres:</h2>
+        <p id="adres"></p>
+        <div id="pano"></div>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <div id="info"></div>
+        <h1>▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<div data-role="page" id="info">
+    <div data-role="header" data-theme="c"> 
+        <a href="index.html" data-transition="flip" data-rel="back" data-direction="reverse" data-icon="arrow-l">Back</a>
+        <h1>Toolkit 9000 | Info</h1> 
+    </div> 
+    
+    <div data-role="content">
+        <p>In opdracht van Arteveldehogeschool.</p>
+        <p>Gemaakt door <a href="http://www.twitter.com/peecken">Pierre Van der Eecken</a> en <a href="http://www.twitter.com/vdclouis">Louis Van de Calseyde</a></p>
+        <p>&copy; 2013</p>
+    </div>
+    <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
+        <a href="#" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <div id="info"></div>
+        <h1>▲</h1>
+        <a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
+    </div>
+</div>
+
+<div data-role="page" id="list">
+    <ul data-role="listview">
+    </ul>
 </div>
