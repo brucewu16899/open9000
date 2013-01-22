@@ -52,10 +52,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $translate = new Zend_Translate(
                 array(
-//                    'adapter' => 'array',
+                    //'adapter' => 'array',
                     'adapter' => 'Xliff',
                     'content' => APPLICATION_PATH . '/languages',
-//                    'locale'  => 'auto',
+                    //'locale'  => 'auto',
                     'locale'  => Zend_Registry::get('Zend_Locale')->getLanguage(),
                     'scan'    => Zend_Translate::LOCALE_DIRECTORY,
                 )

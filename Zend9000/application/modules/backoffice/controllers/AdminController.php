@@ -109,11 +109,11 @@ class Backoffice_AdminController extends Zend_Controller_Action
         if ($request->isPost() ) {
             if ($form->isValid( $request->getPost() )) {
                 $values = $form->getValues();
-//                Zend_Debug::dump($values);
+                //Zend_Debug::dump($values);
 
                 $admin = new Backoffice_Model_Admin($values);
 
-//                Zend_Debug::dump($admin);
+                //Zend_Debug::dump($admin);
 
                 $adminMapper = new Backoffice_Model_AdminMapper();
                 $adminMapper->save($admin);
@@ -121,6 +121,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
         }
         $view->form = $form;
     }
+    
     public function editAction()
     {
         $form = new Backoffice_Form_Register();
