@@ -41,6 +41,92 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         /* $this->redirect('backoffice'); */
+
+         //CACHE TEST 
+         include_once APPLICATION_PATH . '/../library/Zend/Cache.php';
+
+        $frontendOptions = array(
+            'lifetime' => null,
+            'automatic_serialization' => true
+            //,'cache_id_prefix' => 'dontUse'
+        );
+
+        $backendOptions = array(
+            // Directory where to store cache files
+            'cache_dir' => APPLICATION_PATH .  '/../tmp'
+
+            // prefix for cache files ; be really careful with this option because a too generic value in a system cache dir (like /tmp) can cause disasters when cleaning the cache
+            ,'file_name_prefix' => 'open9000'
+            
+            // Enable / disable read control : if enabled, a control key is embedded in the cache file and this key is compared with the one calculated after the reading.
+            ,'read_control' => false
+        );
+
+        $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+        $id = 'cache';
+
+        if (isset($_GET['form_submit']) && $_GET['form_submit'] == 'clear')
+        {
+            $cache->remove($id);
+        }
+
+        $start_time = microtime(true);
+
+        if (!($data = $cache->load($id))) {
+            echo "Not found in cache<br />";
+            
+            mysql_connect('localhost', 'root', 'root');
+            mysql_select_db('ZendFrameworkDemo');
+            $query = 'select id, url from datasets where id = "1"';
+            $urls = mysql_query($query);
+            
+            $data = array();
+            while ($row = mysql_fetch_assoc($urls)) {
+                $data[] = $row;
+            }
+
+            $cache->save($data);
+
+        } else {
+            echo "Running from Cache<br />";
+        }
+
+        echo '<pre>';
+        //print_r($data);
+        echo '</pre>';
+
+        echo sprintf('%01.4f', microtime(true) - $start_time);
+
+
+    }
+
+    public function addAction()
+    {
+
+    	$this->view->title = "yoyo";
+
+    	// $request = $this->getRequest();
+
+    	// if ($request->isPost() ) {
+    	//     if ($form->isValid( $request->getPost() )) {
+    	//         $values = $form->getValues();
+    	//         //Zend_Debug::dump($values);
+
+    	//         $admin = new Backoffice_Model_Admin($values);
+
+    	//         //Zend_Debug::dump($admin);
+
+    	//         $adminMapper = new Backoffice_Model_AdminMapper();
+    	//         $adminMapper->save($admin);
+    	//     }
+    	// }
+    	
+
+
+    	$form = new Application_Form_DatabaseForm();
+
+    	$view->form = $form;
+
     }
 
 }

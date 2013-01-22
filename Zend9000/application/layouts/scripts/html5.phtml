@@ -1,21 +1,21 @@
 <!-- html5 layout -->
 <?php
-
-echo $this->doctype(), PHP_EOL; ?>
+	echo $this->doctype(), PHP_EOL; 
+?>
 <html lang="nl">
-<head>
-<?php
-echo $this->headMeta()  , PHP_EOL,
-     $this->headTitle() , PHP_EOL,
-     $this->headLink()  , PHP_EOL,
-     $this->headScript(), PHP_EOL;
-?>
-</head>
-<body>
-<?php
-echo $this->layout()->content, PHP_EOL
-		//, $this->inlineScript()   , PHP_EOL
-;
-?>
-</body>
+	<head>
+		<?php
+			echo $this->headMeta()  , PHP_EOL,
+			     $this->headTitle() , PHP_EOL,
+			     $this->headLink()  , PHP_EOL,
+			     $this->headScript(), PHP_EOL;
+		?>
+	</head>
+	<body>
+		<?php
+			echo $this->layout()->content, PHP_EOL
+					//, $this->inlineScript()   , PHP_EOL
+			;
+		?>
+	</body>
 </html>
