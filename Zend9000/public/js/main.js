@@ -110,17 +110,18 @@ function getParking() {
 		 	//get info for parking page
 		 	google.maps.event.addListener(marker, 'click', function() {
 
+
+		 		var title = val.description;
+		 		var address = val.address;
+		 		var contact = val.contactInfo;
+
+	 			$('#parking-content h1').html(title);
+				$('#parking-content .p-address').html(address);
+	 			$('#parking-content a').html(contact);
+				$('#p-right p').html('<span id="free">Free ' + ac + '</span> - <span id="occupied">Occupied ' + oc + '</span>');
+		 		
 		 		//only add one canvaselement
 		 		if ( $('#canvas').is(':empty') ){
-
-			 		var title = val.description;
-			 		var address = val.address;
-			 		var contact = val.contactInfo;
-
-		 			$('#parking-content h1').html(title);
-					$('#parking-content .p-address').html(address);
-		 			$('#parking-content a').html(contact);
-					$('#p-right p').html('<span id="free">Free ' + ac + '</span> - <span id="occupied">Occupied ' + oc + '</span>');
 
 					var chartdata = [ ac, oc ];
 
@@ -662,10 +663,18 @@ $(function(){
 		type: "GET",
 		dataType: "text",
 		success: function (data){
-			window.console.log("succes");
-			data.split("{");
-			window.console.log(data);
 			//window.console.log(data);
+			var splitr = data.split(':"');
+			//console.log(splitr[splitr.length-1]);
+
+			var kaka = splitr[splitr.length-1];
+			
+			//var prosplit = kaka.toString().split('";}}');
+			//var bossplit = prosplit[0];
+			//window.console.log(data);
+			//console.log(bossplit);
+			//var bossobject = JSON.parse(bossplit);
+			//console.log(bossobject);
 		},
 		error : function () {
 			window.console.log("fail");

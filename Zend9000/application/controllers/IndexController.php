@@ -40,10 +40,8 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        /* $this->redirect('backoffice'); */
-
-         //CACHE TEST 
-         include_once APPLICATION_PATH . '/../library/Zend/Cache.php';
+        //CACHE TEST 
+        include_once APPLICATION_PATH . '/../library/Zend/Cache.php';
 
         $frontendOptions = array(
             'lifetime' => null,
@@ -61,8 +59,9 @@ class IndexController extends Zend_Controller_Action
             // Enable / disable read control : if enabled, a control key is embedded in the cache file and this key is compared with the one calculated after the reading.
             ,'read_control' => false
         );
-
+        
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+
         $id = 'cache';
 
         if (isset($_GET['form_submit']) && $_GET['form_submit'] == 'clear')
@@ -77,7 +76,7 @@ class IndexController extends Zend_Controller_Action
             
             mysql_connect('localhost', 'root', 'root');
             mysql_select_db('ZendFrameworkDemo');
-            $query = 'select id, url from datasets where id = "1"';
+            $query = 'select id, url from datasets where id="1"';
             $urls = mysql_query($query);
             
             $data = array();
@@ -96,8 +95,6 @@ class IndexController extends Zend_Controller_Action
         echo '</pre>';
 
         echo sprintf('%01.4f', microtime(true) - $start_time);
-
-
     }
 
     public function addAction()
@@ -126,7 +123,5 @@ class IndexController extends Zend_Controller_Action
     	$form = new Application_Form_DatabaseForm();
 
     	$view->form = $form;
-
     }
-
 }
