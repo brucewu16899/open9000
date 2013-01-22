@@ -79,8 +79,6 @@ function geoError(error) {
 function getParking() {
 	
 	$.getJSON(parkingurl, function(data) {
-		window.console.log("bla");
-		window.console.log(data);
 		var parkingimage = 'img/parking.png';
 
 		$.each(data.Parkings.parkings, function(key, val){
@@ -658,21 +656,15 @@ $("#home").live("pageshow", function (b) {
 
 //doc ready
 $(function(){
-	window.console.log("test");
-
-	// $.getJSON("../tmp/open9000---cache.json", function(data) {
-	// 	window.console.log("bla");
-	// 	window.console.log(data);
-	// });
 
 	$.ajax({
-		url : "../tmp/test.json",
+		url : "../tmp/open9000---cache",
 		type: "GET",
 		dataType: "text",
 		success: function (data){
 			window.console.log("succes");
 			data.split("{");
-			window.console.log(data.length);
+			window.console.log(data);
 			//window.console.log(data);
 		},
 		error : function () {
