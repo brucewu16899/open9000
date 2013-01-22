@@ -35,7 +35,7 @@ class IndexController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+      /* Initialize action controller here */
     }
 
     public function indexAction()
@@ -50,57 +50,65 @@ class IndexController extends Zend_Controller_Action
         );
 
         $backendOptions = array(
-            // Directory where to store cache files
-            'cache_dir' => APPLICATION_PATH .  '/../tmp'
+          // Directory where to store cache files
+          'cache_dir' => APPLICATION_PATH .  '/../tmp'
 
-            // prefix for cache files ; be really careful with this option because a too generic value in a system cache dir (like /tmp) can cause disasters when cleaning the cache
-            ,'file_name_prefix' => 'open9000'
-            
-            // Enable / disable read control : if enabled, a control key is embedded in the cache file and this key is compared with the one calculated after the reading.
-            ,'read_control' => false
+          // prefix for cache files ; be really careful with this option because a too generic value in a system cache dir (like /tmp) can cause disasters when cleaning the cache
+          ,'file_name_prefix' => 'open9000'
+          
+          // Enable / disable read control : if enabled, a control key is embedded in the cache file and this key is compared with the one calculated after the reading.
+          ,'read_control' => false
         );
-        
-        $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
 
-        $id = 'cache';
+        mysql_connect('localhost', 'root', 'root');
+        mysql_select_db('ZendFrameworkDemo');
+        $query = 'select count(id) from datasets';
+        $urls = mysql_query($query);
+        $amountDatasetsArr = mysql_fetch_assoc($urls);
+        $amountDatasets = (int)$amountDatasetsArr["count(id)"];
+         
+        for ($i=1; $i <= $amountDatasets; $i++) { 
+        	//var_dump( $i );
+	        $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+	        $id = 'cache'.$i;
 
-        if (isset($_GET['form_submit']) && $_GET['form_submit'] == 'clear')
-        {
-            $cache->remove($id);
+	        if (isset($_GET['form_submit']) && $_GET['form_submit'] == 'clear')
+	        {
+	          $cache->remove($id);
+	        }
+
+	        //$start_time = microtime(true);
+
+	        if (!($data = $cache->load($id))) {
+	          //echo "Not found in cache<br />";
+	          mysql_connect('localhost', 'root', 'root');
+	          mysql_select_db('ZendFrameworkDemo');
+	          $query = 'select id, url from datasets where id="'.$i.'"';
+	          $urls = mysql_query($query);
+	          
+	          $data = array();
+	          while ($row = mysql_fetch_assoc($urls)) {
+              $data[] = $row;
+	          }
+
+	          $cache->save($data);
+
+	        } else {
+	          //echo "Running from Cache<br/>";
+	        }
         }
 
-        $start_time = microtime(true);
 
-        if (!($data = $cache->load($id))) {
-            echo "Not found in cache<br />";
-            
-            mysql_connect('localhost', 'root', 'root');
-            mysql_select_db('ZendFrameworkDemo');
-            $query = 'select id, url from datasets where id="1"';
-            $urls = mysql_query($query);
-            
-            $data = array();
-            while ($row = mysql_fetch_assoc($urls)) {
-                $data[] = $row;
-            }
-
-            $cache->save($data);
-
-        } else {
-            echo "Running from Cache<br />";
-        }
-
-        echo '<pre>';
+        //echo '<pre>';
         //print_r($data);
-        echo '</pre>';
-
-        echo sprintf('%01.4f', microtime(true) - $start_time);
+        //echo '</pre>';
+        //echo sprintf('%01.4f', microtime(true) - $start_time);
     }
 
     public function addAction()
     {
-
-    	$this->view->title = "yoyo";
+    	$view = $this->view;
+    	$view->title = "yoyo";
 
     	// $request = $this->getRequest();
 
