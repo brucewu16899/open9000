@@ -38,4 +38,15 @@ class Backoffice_Bootstrap extends Zend_Application_Module_Bootstrap
 
 //        Zend_Registry::set('Zend_Translate', $translate);
     }
+
+    public function __construct($application)
+    {
+      parent::__construct($application);
+
+      $bootstrap = $this->getApplication();
+      $bootstrap->bootstrap('frontcontroller');
+
+      $front = $bootstrap->getResource('frontcontroller');
+      $front->registerPlugin(new group10_Controller_Plugin_layout() );
+    }
 }

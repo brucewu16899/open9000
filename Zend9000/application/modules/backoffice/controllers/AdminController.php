@@ -39,11 +39,11 @@ class Backoffice_AdminController extends Zend_Controller_Action
     {
         $this->_auth = Zend_Auth::getInstance();
 
-        $layout = Zend_Layout::getMvcInstance();
+        //$layout = Zend_Layout::getMvcInstance();
         // Set a layout script path:
         //$layout->setLayoutPath('/path/to/you/default/module/layouts');
         // choose a different layout script:
-        $layout->setLayout('html5');
+        //$layout->setLayout('html5');
     }
 
     public function indexAction()
@@ -121,7 +121,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
         }
         $view->form = $form;
     }
-    
+
     public function editAction()
     {
         $form = new Backoffice_Form_Register();
