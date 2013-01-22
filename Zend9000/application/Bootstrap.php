@@ -30,6 +30,17 @@
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
  */
 
+/*
+ * The default bootstrap:
+ *
+ * The default bootstrap sets up paths, loads any resources, and prep’s your application — all before your application even knows what module has been requested. 
+ *
+ * The module bootstrap:
+ *
+ * The module bootstrap can set up paths and add to or alter loaded resources like an ACL or navigation, but they’re unable to load module specific resources or execute any module specific code.
+ *
+ */
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     public function _initLocale()
