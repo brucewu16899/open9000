@@ -39,7 +39,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #cccccc;
   margin: 1em 0;
   padding: 0; }
 
@@ -130,7 +130,7 @@ textarea {
    ========================================================================== */
 @media only screen and (min-width: 35em) {
   /* Style adjustments for viewports that meet the condition */ }
-@media print, (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+@media print, (-o-min-device-pixel-ratio: 5 / 4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */ }
 /* ==========================================================================
    Print styles.
