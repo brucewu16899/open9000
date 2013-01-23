@@ -195,7 +195,7 @@ function getParking() {
 			 	
 			 	//infowindow
 			 	bindInfoWindow(marker, map, infowindow, '<h1>' + this.description + '</h1>' +
-			 	'<p>Places left: ' + this.availableCapacity + '</p><a href="#parking" data-transition="slide">go</a>');
+			 	'<p>Places left: ' + this.availableCapacity + '</p><a href="#parking" data-transition="slide">More Info</a>');
 		    }); //eo each
 	});
 }
@@ -228,7 +228,7 @@ function getSport() {
 
 		 	//infowindow
 			bindInfoWindow(marker, map, infowindow, '<h1>' + this.naam + '</h1>' +
-		 	'<p>Type: ' + this.type + '</p><a href="#sport" data-transition="slide">go</a>');
+		 	'<p>Type: ' + this.type + '</p><a href="#sport" data-transition="slide">More Info</a>');
 		});
 	});
 }
@@ -278,7 +278,7 @@ function getApotheken() {
 		 	});
 
 		 	//infowindow
-			bindInfoWindow(marker, map, infowindow, '<h1>' + this.naam + '</h1><a href="#apo" data-transition="slide">go</a>');
+			bindInfoWindow(marker, map, infowindow, '<h1>' + this.naam + '</h1><a href="#apo" data-transition="slide">More Info</a>');
 		});
 
 		mcApo = new MarkerClusterer(map, mApo);
@@ -328,7 +328,7 @@ function getSani() {
 		 	});
 
 		 	//infowindow
-			bindInfoWindow(marker, map, infowindow, '<h1>' + this.situering + '</h1><p>Open 7op7: ' + open + '</p><a href="#sani" data-transition="slide">go</a>');
+			bindInfoWindow(marker, map, infowindow, '<h1>' + this.situering + '</h1><p>Open 7op7: ' + open + '</p><a href="#sani" data-transition="slide">More Info</a>');
 		});
 		mcSani = new MarkerClusterer(map, mSani);
 	});
@@ -360,7 +360,7 @@ function getBios() {
 		 	});
 
 			//infowindow
-		 	bindInfoWindow(marker, map, infowindow, '<h1>' + this.naam + '</h1><a href="#bios" data-transition="slide">go</a>');
+		 	bindInfoWindow(marker, map, infowindow, '<h1>' + this.naam + '</h1><a href="#bios" data-transition="slide">More Info</a>');
 		});
 	});
 }
@@ -389,7 +389,7 @@ function getBib() {
 		 	});
 
 			//infowindow
-		 	bindInfoWindow(marker, map, infowindow, '<h1>Bib:</h1><h2>' + val.locatie + '</h2><a href="#bib" data-transition="slide">go</a>');
+		 	bindInfoWindow(marker, map, infowindow, '<h1>Bib:</h1><h2>' + val.locatie + '</h2><a href="#bib" data-transition="slide">More Info</a>');
 		});
 	});
 }
@@ -422,7 +422,7 @@ function getArts() {
 		 	});
 
 			//infowindow
-		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.naam_wacht + '</h1><a href="#arts" data-transition="slide">go</a>');
+		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.naam_wacht + '</h1><a href="#arts" data-transition="slide">More Info</a>');
 		});
 	});
 }
@@ -455,7 +455,7 @@ function getSchool() {
 		 	});
 
 			//infowindow
-		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.roepnaam + '</h1><a href="#school" data-transition="slide">go</a>');
+		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.roepnaam + '</h1><a href="#school" data-transition="slide">More Info</a>');
 
 		});
 		mcSchool = new MarkerClusterer(map, mSchool);
@@ -497,7 +497,7 @@ function getZiekenhuis() {
 			};
 			
 			//infowindow
-		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.naam + '</h1><a href="#ziek" data-transition="slide">go</a>');
+		 	bindInfoWindow(marker, map, infowindow, '<h1>' + val.naam + '</h1><a href="#ziek" data-transition="slide">More Info</a>');
 		}); //eo each
 	});
 }

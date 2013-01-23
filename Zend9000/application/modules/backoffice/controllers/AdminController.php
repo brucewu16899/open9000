@@ -134,6 +134,8 @@ class Backoffice_AdminController extends Zend_Controller_Action
 
                 $adminMapper = new Backoffice_Model_AdminMapper();
                 $adminMapper->save($admin);
+
+                return $this->redirect('backoffice/admin/login/');
             }
         }
         $view->form = $form;
@@ -155,7 +157,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
         $adminMapper = new Backoffice_Model_AdminMapper();
         $array = $adminMapper->read($id);
 
-        Zend_Debug::dump($array);
+        //Zend_Debug::dump($array);
 
         $form->populate($array);
 
