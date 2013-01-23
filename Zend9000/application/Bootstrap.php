@@ -157,7 +157,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         ;
         $view->navigation()->menu()
                            ->setPartial('partials/menu.phtml')
-
                            ->setUlClass('nav')
         ;
     }

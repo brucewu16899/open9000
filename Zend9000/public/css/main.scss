@@ -93,6 +93,14 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+.navbar{
+    margin-top: 15px;
+}
+
+.navbar .nav>li>a{
+    padding-top: 15px;
+}
+
 #map-container{
     margin: 0;
     padding: 8px;
