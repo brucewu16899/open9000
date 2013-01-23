@@ -48,8 +48,20 @@ class Backoffice_AdminController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        Zend_Debug::dump($this->_auth->hasIdentity());
-        Zend_Debug::dump($this->_auth->getIdentity());
+        //Zend_Debug::dump($this->_auth->hasIdentity());
+        //Zend_Debug::dump($this->_auth->getIdentity());
+
+        $auth = Zend_Auth::getInstance();
+        $id = $auth->getStorage()->read()['id']; // PHP 5.4 feature
+
+        $adminMapper = new Backoffice_Model_AdminMapper();
+        $array = $adminMapper->read($id);
+
+        $view = $this->view;
+        $view->userInfo = $array;
+
+        $role = $this->_auth->getIdentity();
+        $view->userRole = $role;
     }
 
     public function loginAction()
@@ -128,7 +140,9 @@ class Backoffice_AdminController extends Zend_Controller_Action
 
         $view = $this->view;
         $view->title = 'Edit - Backoffice';
-
+        
+        //set the title in the html <head>
+        $view->headTitle()->append('Edit');
 
         $auth = Zend_Auth::getInstance();
         $id = $auth->getStorage()->read()['id']; // PHP 5.4 feature

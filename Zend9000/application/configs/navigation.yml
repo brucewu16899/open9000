@@ -23,13 +23,7 @@ Home:
               action: login
               resource: Backoffice_AdminController
               privilege: loginAction
-            logoutAction:
-              label: Logout
-              module: backoffice
-              controller: admin
-              action: logout
-              resource: Backoffice_AdminController
-              privilege: logoutAction
+            
             registerAction:
               label: Register
               module: backoffice
@@ -44,3 +38,11 @@ Home:
               action: edit
               resource: Backoffice_AdminController
               privilege: editAction
+            logoutAction:
+              label: Logout
+              module: backoffice
+              controller: admin
+              action: logout
+              resource: Backoffice_AdminController
+              privilege: logoutAction
+          

@@ -40,69 +40,77 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        //CACHE TEST 
-        include_once APPLICATION_PATH . '/../library/Zend/Cache.php';
+      //CACHE TEST 
+			//source:
+  		//http://www.joeyrivera.com/2009/caching-using-phpzend_cache-and-mysql/
 
-        $frontendOptions = array(
-            'lifetime' => null,
-            'automatic_serialization' => true
-            //,'cache_id_prefix' => 'dontUse'
-        );
+      include_once APPLICATION_PATH . '/../library/Zend/Cache.php';
 
-        $backendOptions = array(
-          // Directory where to store cache files
-          'cache_dir' => APPLICATION_PATH .  '/../tmp'
+      // http://framework.zend.com/manual/1.12/en/zend.cache.frontends.html
+      $frontendOptions = array(
+          'lifetime' => null,
+          'automatic_serialization' => true
+          //,'cache_id_prefix' => 'dontUse'
+      );
 
-          // prefix for cache files ; be really careful with this option because a too generic value in a system cache dir (like /tmp) can cause disasters when cleaning the cache
-          ,'file_name_prefix' => 'open9000'
-          
-          // Enable / disable read control : if enabled, a control key is embedded in the cache file and this key is compared with the one calculated after the reading.
-          ,'read_control' => false
-        );
+      // http://framework.zend.com/manual/1.12/en/zend.cache.backends.html
+      $backendOptions = array(
+        // Directory where to store cache files
+        'cache_dir' => APPLICATION_PATH .  '/../tmp'
 
-        mysql_connect('localhost', 'root', 'root');
-        mysql_select_db('ZendFrameworkDemo');
-        $query = 'select count(id) as `amount` from datasets';
-        $urls = mysql_query($query);
-        $amountDatasetsArr = mysql_fetch_assoc($urls);
-        $amountDatasets = (int)$amountDatasetsArr["amount"];
-         
-        for ($i=1; $i <= $amountDatasets; $i++) { 
-        	//var_dump( $i );
-	        $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
-	        $id = 'cache'.$i;
+        // prefix for cache files ; be really careful with this option because a too generic value in a system cache dir (like /tmp) can cause disasters when cleaning the cache
+        ,'file_name_prefix' => 'open9000'
+        
+        // Enable / disable read control : if enabled, a control key is embedded in the cache file and this key is compared with the one calculated after the reading.
+        ,'read_control' => false
+      );
 
-	        if (isset($_GET['form_submit']) && $_GET['form_submit'] == 'clear')
-	        {
-	          $cache->remove($id);
-	        }
+      //get the amount of datasets
+      mysql_connect('localhost', 'root', 'root');
+      mysql_select_db('ZendFrameworkDemo');
+      $query = 'select count(id) as `amount` from datasets';
+      $urls = mysql_query($query);
+      $amountDatasetsArr = mysql_fetch_assoc($urls);
+      $amountDatasets = (int)$amountDatasetsArr["amount"];
+       
+      for ($i=1; $i <= $amountDatasets; $i++) { 
+      	//var_dump( $i );
 
-	        //$start_time = microtime(true);
+      	//http://framework.zend.com/manual/1.12/en/zend.cache.cache.manager.html
+        $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+        $id = 'cache'.$i;
 
-	        if (!($data = $cache->load($id))) {
-	          //echo "Not found in cache<br />";
-	          mysql_connect('localhost', 'root', 'root');
-	          mysql_select_db('ZendFrameworkDemo');
-	          $query = 'select id, url from datasets where id="'.$i.'"';
-	          $urls = mysql_query($query);
-	          
-	          $data = array();
-	          while ($row = mysql_fetch_assoc($urls)) {
-              $data[] = $row;
-	          }
-
-	          $cache->save($data);
-
-	        } else {
-	          //echo "Running from Cache<br/>";
-	        }
+        if (isset($_GET['form_submit']) && $_GET['form_submit'] == 'clear')
+        {
+          $cache->remove($id);
         }
 
+        //$start_time = microtime(true);
 
-        //echo '<pre>';
-        //print_r($data);
-        //echo '</pre>';
-        //echo sprintf('%01.4f', microtime(true) - $start_time);
+        if (!($data = $cache->load($id))) {
+          //echo "Not found in cache<br />";
+          mysql_connect('localhost', 'root', 'root');
+          mysql_select_db('ZendFrameworkDemo');
+          $query = 'select id, url from datasets where id="'.$i.'"';
+          $urls = mysql_query($query);
+          
+          $data = array();
+          while ($row = mysql_fetch_assoc($urls)) {
+            $data[] = $row;
+          }
+
+          $cache->save($data);
+
+        } else {
+          //echo "Running from Cache<br/>";
+        }
+      }
+
+
+      //echo '<pre>';
+      //print_r($data);
+      //echo '</pre>';
+      //echo sprintf('%01.4f', microtime(true) - $start_time);
     }
 
     public function addAction()

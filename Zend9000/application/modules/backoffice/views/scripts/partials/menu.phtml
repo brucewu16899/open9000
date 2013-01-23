@@ -29,9 +29,14 @@
  * @author     Olivier Parent
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
  */
-?><nav class="navbar">
-    <div class="navbar-inner">
-    <?php echo $this->menu()->htmlify($this->container->findOneBy('active', true)->getParent()->getParent()->setClass('brand')) ?>
-    <?php echo $this->menu()->renderSubMenu($this->container) ?>
-    </div>
+?>
+<nav class="navbar">
+  <div class="navbar-inner">
+  	<?php 
+  		echo $this->menu()->htmlify($this->container->findOneBy('active', true)->getParent()->getParent()->setClass('brand')) 
+  	?>
+  	<?php 
+  		echo $this->menu()->renderSubMenu($this->container) 
+  	?>
+  </div>
 </nav>

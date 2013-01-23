@@ -29,13 +29,28 @@
  * @author     Olivier Parent
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
  */
-?><h1><?php echo $this->title; ?></h1>
-<?php
-/*echo $this->navigation()->breadcrumbs();*/
-echo $this->navigation()->menu();
 ?>
-
-<p>Welkom admin</p>
-
-
-
+<?php echo $this->navigation()->menu(); ?>
+<?php echo $this->navigation()->breadcrumbs(); ?>
+<h1><?php echo $this->title; ?></h1>
+<?php //var_dump($this->userInfo); ?>
+<dl class="dl-horizontal">
+  <dt>Username:</dt>
+  <dd><?= $this->userInfo['username']; ?></dd>
+</dl>
+<dl class="dl-horizontal">
+  <dt>Given name:</dt>
+  <dd><?= $this->userInfo['givenname']; ?></dd>
+</dl>
+<dl class="dl-horizontal">
+  <dt>Family name:</dt>
+  <dd><?= $this->userInfo['familyname']; ?></dd>
+</dl>
+<dl class="dl-horizontal">
+  <dt>Email address:</dt>
+  <dd><?= $this->userInfo['email']; ?></dd>
+</dl>
+<dl class="dl-horizontal">
+  <dt>User role:</dt>
+  <dd><?= $this->userRole['role']; ?></dd>
+</dl>
