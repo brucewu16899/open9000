@@ -34,7 +34,6 @@
 
 class IndexController extends Zend_Controller_Action
 {
-
     public function init()
     {
       /* Initialize action controller here */
@@ -42,7 +41,7 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-      //CACHE TEST 
+      //CACHE 
 			//source:
   		//http://www.joeyrivera.com/2009/caching-using-phpzend_cache-and-mysql/
 

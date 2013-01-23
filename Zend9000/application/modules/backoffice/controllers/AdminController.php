@@ -190,4 +190,12 @@ class Backoffice_AdminController extends Zend_Controller_Action
         }
         $view->form = $form;
     }
+
+    public function datasetsAction()
+    {
+        $view = $this->view;
+        $view->title = 'Backoffice index';
+
+        
+    }
 }
