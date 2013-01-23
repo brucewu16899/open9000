@@ -123,6 +123,14 @@ textarea {
   #p-right #occupied {
     color: #aec7e8; }
 
+#logo {
+  width: 200px;
+  margin: 30px auto;
+  display: block; }
+
+#copy {
+  text-align: center; }
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    Theses examples override the primary ('mobile first') styles.
