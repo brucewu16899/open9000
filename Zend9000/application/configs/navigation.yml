@@ -16,14 +16,6 @@ Home:
           controller: admin
           action: index
           pages:
-            loginAction:
-              label: Login
-              module: backoffice
-              controller: admin
-              action: login
-              resource: Backoffice_AdminController
-              privilege: loginAction
-            
             registerAction:
               label: Register
               module: backoffice
@@ -38,6 +30,13 @@ Home:
               action: edit
               resource: Backoffice_AdminController
               privilege: editAction
+            loginAction:
+              label: Login
+              module: backoffice
+              controller: admin
+              action: login
+              resource: Backoffice_AdminController
+              privilege: loginAction
             logoutAction:
               label: Logout
               module: backoffice
