@@ -51,17 +51,22 @@ class Backoffice_AdminController extends Zend_Controller_Action
         //Zend_Debug::dump($this->_auth->hasIdentity());
         //Zend_Debug::dump($this->_auth->getIdentity());
 
-        $auth = Zend_Auth::getInstance();
-        $id = $auth->getStorage()->read()['id']; // PHP 5.4 feature
 
-        $adminMapper = new Backoffice_Model_AdminMapper();
-        $array = $adminMapper->read($id);
+        if ($this->_auth->hasIdentity() ) {
+            $auth = Zend_Auth::getInstance();
+            $id = $auth->getStorage()->read()['id']; // PHP 5.4 feature
 
-        $view = $this->view;
-        $view->userInfo = $array;
+            $adminMapper = new Backoffice_Model_AdminMapper();
+            $array = $adminMapper->read($id);
 
-        $role = $this->_auth->getIdentity();
-        $view->userRole = $role;
+            $view = $this->view;
+            $view->userInfo = $array;
+
+            $role = $this->_auth->getIdentity();
+            $view->userRole = $role;
+        } else {
+            return $this->redirect('backoffice');
+        }
     }
 
     public function loginAction()
