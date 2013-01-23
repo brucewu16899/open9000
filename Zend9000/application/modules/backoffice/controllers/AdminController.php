@@ -55,6 +55,8 @@ class Backoffice_AdminController extends Zend_Controller_Action
         //Zend_Debug::dump($this->_auth->hasIdentity());
         //Zend_Debug::dump($this->_auth->getIdentity());
 
+        $this->view->messages = $this->_helper->flashMessenger->getMessages();
+
         $view = $this->view;
         $view->title = 'Backoffice index';
 
@@ -158,7 +160,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
         $view->title = 'Edit - Backoffice';
         
         //set the title in the html <head>
-        //$view->headTitle()->append('Edit');
+        $view->headTitle()->append('Edit');
 
         $auth = Zend_Auth::getInstance();
         $id = $auth->getStorage()->read()['id']; // PHP 5.4 feature
@@ -175,13 +177,15 @@ class Backoffice_AdminController extends Zend_Controller_Action
         if ($request->isPost() ) {
             if ($form->isValid( $request->getPost() )) {
 
-                //$this->_flashMessenger->addMessage('Record Saved!');
-
                 $values = $form->getValues();
 
                 $admin = new Backoffice_Model_Admin($values);
                 $admin->setId($id);
                 $adminMapper->save($admin);
+
+                // http://akrabat.com/zend-framework/zend-frameworks-flash-messenger-action-helper/
+                $this->_helper->flashMessenger->addMessage('Task saved');
+                $this->_helper->redirector('index');
             }
         }
         $view->form = $form;
