@@ -80,10 +80,10 @@ class Backoffice_AdminController extends Zend_Controller_Action
 
         $form = new Backoffice_Form_Login( array('username' => $bla) );
 
-        $translate = Zend_Registry::get('Zend_Translate');
+        //$translate = Zend_Registry::get('Zend_Translate');
 
         $view = $this->view;
-        $view->title = $translate->_('Login') . ' - Backoffice';
+        $view->title = 'Login - Backoffice';
 
         $request = $this->getRequest();
 
