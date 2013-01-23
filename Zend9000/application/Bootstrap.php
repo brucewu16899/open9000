@@ -59,6 +59,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set('Zend_Locale', $locale);
     }
 
+    /*
     public function _initTranslate()
     {
         $translate = new Zend_Translate(
@@ -74,7 +75,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         Zend_Registry::set('Zend_Translate', $translate);
     }
-
+    */
+    
     public function _initValidate()
     {
         //Zend_Debug::dump(APPLICATION_PATH);

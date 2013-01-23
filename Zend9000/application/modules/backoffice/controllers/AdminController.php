@@ -28,11 +28,12 @@
  *
  * @author     Olivier Parent
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
+ * 
+ * Improved by Group 10: Van de Calseyde Louis & Van der Eecken Pierre
  */
 
 class Backoffice_AdminController extends Zend_Controller_Action
 {
-
     protected $_auth = null;
 
     public function init()
@@ -181,10 +182,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
                 $admin = new Backoffice_Model_Admin($values);
                 $admin->setId($id);
                 $adminMapper->save($admin);
-
-
             }
-
         }
         $view->form = $form;
     }

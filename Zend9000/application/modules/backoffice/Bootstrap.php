@@ -28,6 +28,8 @@
  *
  * @author     Olivier Parent
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
+ *
+ * Improved by Group 10: Van de Calseyde Louis & Van der Eecken Pierre
  */
 
 //class Backoffice_Application_Module_Bootstrap extends Zend_Application_Module_Bootstrap

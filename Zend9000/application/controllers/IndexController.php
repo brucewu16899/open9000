@@ -28,6 +28,8 @@
  *
  * @author     Olivier Parent
  * @copyright  Copyright (c) 2012 Artevelde University College Ghent
+ *
+ * Improved by Group 10: Van de Calseyde Louis & Van der Eecken Pierre
  */
 
 class IndexController extends Zend_Controller_Action
@@ -76,7 +78,7 @@ class IndexController extends Zend_Controller_Action
       for ($i=1; $i <= $amountDatasets; $i++) { 
       	//var_dump( $i );
 
-      	//http://framework.zend.com/manual/1.12/en/zend.cache.cache.manager.html
+      	// http://framework.zend.com/manual/1.12/en/zend.cache.cache.manager.html
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
         $id = 'cache'.$i;
 
@@ -85,10 +87,10 @@ class IndexController extends Zend_Controller_Action
           $cache->remove($id);
         }
 
-        //$start_time = microtime(true);
+        $start_time = microtime(true);
 
         if (!($data = $cache->load($id))) {
-          //echo "Not found in cache<br />";
+          $status = "Not found in cache<br />";
           mysql_connect('localhost', 'root', 'root');
           mysql_select_db('ZendFrameworkDemo');
           $query = 'select id, url from datasets where id="'.$i.'"';
@@ -102,42 +104,17 @@ class IndexController extends Zend_Controller_Action
           $cache->save($data);
 
         } else {
-          //echo "Running from Cache<br/>";
+          $status = "Running from Cache<br/>";
         }
       }
 
+      $view = $this->view;
+      $test = sprintf('%01.4f', microtime(true) - $start_time);
+      $view->test = $test;
+      $view->status = $status;
 
       //echo '<pre>';
       //print_r($data);
       //echo '</pre>';
-      //echo sprintf('%01.4f', microtime(true) - $start_time);
-    }
-
-    public function addAction()
-    {
-    	$view = $this->view;
-    	$view->title = "yoyo";
-
-    	// $request = $this->getRequest();
-
-    	// if ($request->isPost() ) {
-    	//     if ($form->isValid( $request->getPost() )) {
-    	//         $values = $form->getValues();
-    	//         //Zend_Debug::dump($values);
-
-    	//         $admin = new Backoffice_Model_Admin($values);
-
-    	//         //Zend_Debug::dump($admin);
-
-    	//         $adminMapper = new Backoffice_Model_AdminMapper();
-    	//         $adminMapper->save($admin);
-    	//     }
-    	// }
-    	
-
-
-    	$form = new Application_Form_DatabaseForm();
-
-    	$view->form = $form;
     }
 }

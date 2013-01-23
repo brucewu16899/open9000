@@ -1,9 +1,6 @@
 <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-<!-- Home page -->
-
+    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
 <div data-role="page" id="home">
     <div data-role="header" data-theme="c">
         <a href="#" onclick="centermap()" data-role="button" data-iconpos="notext" data-icon="home"></a>
@@ -53,6 +50,11 @@
     </div>
     <div data-id="main-footer" data-role="footer" data-position="fixed" data-theme="c">
 	<a data-ajax="false" href="<?php echo $this->url(array('module' => 'backoffice','controller'=>'admin','action'=>'index'), null, FALSE); // or : echo $this->baseUrl('backoffice/admin'); // http://blog.ericlamb.net/2010/04/zend-framework-url-view-helper/ ?>" data-role="button" data-iconpos="notext" data-icon="star"></a>
+        <?php echo $this->test ?><?php echo $this->status ?>
+        <form method="get">
+                <input name="form_submit" type="submit" value="reload">
+                <input name="form_submit" type="submit" value="clear">
+        </form>
 		<a href="#info" data-transition="flip" data-role="button" data-iconpos="notext" data-icon="info" class="ui-btn-right"></a>
     </div>
 </div>
