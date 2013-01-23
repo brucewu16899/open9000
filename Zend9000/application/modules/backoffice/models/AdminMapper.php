@@ -45,7 +45,8 @@ class Backoffice_Model_AdminMapper
      */
     public function save(Backoffice_Model_Admin $admin)
     {
-        $data = array('adm_givenname'  => $admin->getGivenname(),
+        $data = array(//'adm_id'         => $admin->getId(),
+                      'adm_givenname'  => $admin->getGivenname(),
                       'adm_familyname' => $admin->getFamilyname(),
                       'adm_email'      => $admin->getEmail(),
                       'adm_username'   => $admin->getUsername(),
@@ -55,9 +56,12 @@ class Backoffice_Model_AdminMapper
         if (null === $admin->getId()) {
             $this->_dbTable->insert($data);
         } else {
-            $data['adm_id'] = $admin->getId();
-            Zend_Debug::dump($data);
-            $this->_dbTable->update($data);
+            //$data['adm_id'] = $admin->getId();
+            $conditions[] = "adm_id = '" . $admin->getId() ."'";
+            //Zend_Debug::dump($data);
+            $this->_dbTable->update($data, $conditions);
+
+            
         }
     }
 

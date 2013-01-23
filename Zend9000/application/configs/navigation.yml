@@ -1,5 +1,5 @@
 Home:
-  label: Home
+  label: Backoffice
   module: default
   controller: index
   action: index

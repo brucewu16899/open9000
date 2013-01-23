@@ -151,7 +151,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
         $view->title = 'Edit - Backoffice';
         
         //set the title in the html <head>
-        $view->headTitle()->append('Edit');
+        //$view->headTitle()->append('Edit');
 
         $auth = Zend_Auth::getInstance();
         $id = $auth->getStorage()->read()['id']; // PHP 5.4 feature
