@@ -39,7 +39,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #ccc;
   margin: 1em 0;
   padding: 0; }
 
@@ -82,7 +82,8 @@ textarea {
   margin-top: 15px; }
 
 .navbar .nav > li > a {
-  padding-top: 15px; }
+  padding-top: 15px;
+  padding-bottom: 15px; }
 
 #map-container {
   margin: 0;
@@ -122,9 +123,6 @@ textarea {
   #p-right #occupied {
     color: #aec7e8; }
 
-.navbar .nav > li > a {
-  padding-bottom: 18px; }
-
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    Theses examples override the primary ('mobile first') styles.
@@ -132,7 +130,7 @@ textarea {
    ========================================================================== */
 @media only screen and (min-width: 35em) {
   /* Style adjustments for viewports that meet the condition */ }
-@media print, (-o-min-device-pixel-ratio: 5 / 4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+@media print, (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */ }
 /* ==========================================================================
    Print styles.
