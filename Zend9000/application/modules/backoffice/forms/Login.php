@@ -32,6 +32,20 @@
 
 class Backoffice_Form_Login extends Zend_Form
 {
+    private $username = '';
+
+    public function setUsername($usern) 
+    {
+        $this->$username = $usern;
+        return $this;
+    }
+
+    public function __construct(array $params = array())
+    {
+      $this->username = $params['username'];
+      parent::__construct(); // <---- INSTEAD of $this->init()
+    }
+
     public function init()
     {
         $decorators = array(
@@ -57,6 +71,7 @@ class Backoffice_Form_Login extends Zend_Form
         $text_username = new Zend_Form_Element_Text('username');
 
         $text_username->setLabel('User name')
+                      ->setValue($this->username)
                       ->setRequired()
                       ->addFilter('StringTrim')                                 // Zend/Filter/StringTrim.php
                       ->addValidator('NotEmpty', true)                          // Zend/Validate/NotEmpty.php

@@ -44,6 +44,9 @@ class Backoffice_AdminController extends Zend_Controller_Action
         //$layout->setLayoutPath('/path/to/you/default/module/layouts');
         // choose a different layout script:
         //$layout->setLayout('html5');
+
+        //$this->_flashMessenger =
+        //    $this->_helper->getHelper('FlashMessenger');
     }
 
     public function indexAction()
@@ -72,7 +75,9 @@ class Backoffice_AdminController extends Zend_Controller_Action
 
     public function loginAction()
     {
-        $form = new Backoffice_Form_Login();
+        $bla = $this->_getParam('username');
+
+        $form = new Backoffice_Form_Login( array('username' => $bla) );
 
         $translate = Zend_Registry::get('Zend_Translate');
 
@@ -128,6 +133,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
         if ($request->isPost() ) {
             if ($form->isValid( $request->getPost() )) {
                 $values = $form->getValues();
+
                 //Zend_Debug::dump($values);
 
                 $admin = new Backoffice_Model_Admin($values);
@@ -137,7 +143,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
                 $adminMapper = new Backoffice_Model_AdminMapper();
                 $adminMapper->save($admin);
 
-                return $this->redirect('backoffice/admin/login/');
+                return $this->redirect('backoffice/admin/login/username/' . $values['username'] );
             }
         }
         $view->form = $form;
@@ -167,12 +173,21 @@ class Backoffice_AdminController extends Zend_Controller_Action
 
         if ($request->isPost() ) {
             if ($form->isValid( $request->getPost() )) {
+
+                //$this->_flashMessenger->addMessage('Record Saved!');
+
                 $values = $form->getValues();
 
                 $admin = new Backoffice_Model_Admin($values);
                 $admin->setId($id);
                 $adminMapper->save($admin);
+<<<<<<< HEAD
 	    }
+=======
+
+
+            }
+>>>>>>> group10 > ∞
         }
         $view->form = $form;
     }
