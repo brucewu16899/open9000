@@ -181,13 +181,10 @@ class Backoffice_AdminController extends Zend_Controller_Action
                 $admin = new Backoffice_Model_Admin($values);
                 $admin->setId($id);
                 $adminMapper->save($admin);
-<<<<<<< HEAD
-	    }
-=======
 
 
             }
->>>>>>> group10 > ∞
+
         }
         $view->form = $form;
     }
