@@ -122,6 +122,9 @@ textarea {
   #p-right #occupied {
     color: #aec7e8; }
 
+.navbar .nav > li > a {
+  padding-bottom: 18px; }
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    Theses examples override the primary ('mobile first') styles.
