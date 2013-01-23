@@ -83,10 +83,17 @@ function geoSuccess(position) {
 		title: 'My location'
 	});
 
-	centermap();
+	if (typeof myGeoMarker === 'undefined'){
+		//console.log('undefined');
+	} else {
+		centermap();
+		//console.log('center');
+	}
+
 }
 
 function centermap() {
+
 	var mypos = myGeoMarker.getPosition();
 	map.setCenter(mypos);
 }
