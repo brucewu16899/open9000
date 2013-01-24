@@ -111,9 +111,5 @@ class IndexController extends Zend_Controller_Action
       $test = sprintf('%01.4f', microtime(true) - $start_time);
       $view->test = $test;
       $view->status = $status;
-
-      //echo '<pre>';
-      //print_r($data);
-      //echo '</pre>';
     }
 }

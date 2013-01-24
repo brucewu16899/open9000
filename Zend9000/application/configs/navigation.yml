@@ -30,13 +30,6 @@ Home:
               action: edit
               resource: Backoffice_AdminController
               privilege: editAction
-            datasetsAction:
-              label: Datasets
-              module: backoffice
-              controller: admin
-              action: datasets
-              resource: Backoffice_AdminController
-              privilege: datasetsAction
             loginAction:
               label: Login
               module: backoffice

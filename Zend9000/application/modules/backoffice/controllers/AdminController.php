@@ -85,7 +85,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
         //$translate = Zend_Registry::get('Zend_Translate');
 
         $view = $this->view;
-        $view->title = 'Login - Backoffice';
+        $view->title = 'Backoffice Login';
 
         $request = $this->getRequest();
 
@@ -129,7 +129,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
         $form = new Backoffice_Form_Register();
 
         $view = $this->view;
-        $view->title = 'Registreren - Backoffice';
+        $view->title = 'Backoffice Registreren';
 
         $request = $this->getRequest();
 
@@ -157,7 +157,7 @@ class Backoffice_AdminController extends Zend_Controller_Action
         $form = new Backoffice_Form_Register();
 
         $view = $this->view;
-        $view->title = 'Edit - Backoffice';
+        $view->title = 'Backoffice Edit';
         
         //set the title in the html <head>
         $view->headTitle()->append('Edit');
@@ -167,8 +167,6 @@ class Backoffice_AdminController extends Zend_Controller_Action
 
         $adminMapper = new Backoffice_Model_AdminMapper();
         $array = $adminMapper->read($id);
-
-        //Zend_Debug::dump($array);
 
         $form->populate($array);
 
@@ -189,13 +187,5 @@ class Backoffice_AdminController extends Zend_Controller_Action
             }
         }
         $view->form = $form;
-    }
-
-    public function datasetsAction()
-    {
-        $view = $this->view;
-        $view->title = 'Backoffice index';
-
-        
     }
 }
